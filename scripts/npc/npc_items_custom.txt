@@ -261,7 +261,7 @@
   "item_capture_good_flag"
   {
     "BaseClass"           "item_datadriven"
-    "AbilityTextureName"  "capture_good_flag"
+    "AbilityTextureName"  "custom/capture_good_flag"
     // General
     //-------------------------------------------------------------------------------------------------------------
     "ID"                 "1101"
@@ -270,7 +270,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                    "9999"
+    "ItemCost"                    "0"
     "ItemShopTags"                "damage"
     "ItemQuality"                 "rare"
     "ItemAliases"                 "radiant flag"
@@ -335,7 +335,7 @@
   "item_capture_bad_flag"
   {
     "BaseClass"                "item_datadriven"
-    "AbilityTextureName"    "capture_bad_flag"
+    "AbilityTextureName"    "custom/capture_bad_flag"
 
     // General
     "ID"                "1102"
@@ -343,7 +343,7 @@
     "Model"             "models\props_teams\banner_dire_small.mdl"
 
     // Item Info
-    "ItemCost"          "9999"
+    "ItemCost"          "0"
     "ItemShopTags"      "damage"
     "ItemQuality"       "artifact"
     "ItemAliases"       "dire flag"

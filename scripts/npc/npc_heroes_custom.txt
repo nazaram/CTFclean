@@ -12,12 +12,14 @@
     "Ability5"        "barebones_empty5"
     "Ability6"        "rattletrap_power_cogs"
 
+
+    
     "ArmorPhysical"       "0"                 // Physical protection.
     "MagicalResistance"       "0"                 // Magical protection (percentage).
 
     "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-    "AttackDamageMin"     "1"                   // Damage range min.
-    "AttackDamageMax"     "1"                   // Damage range max.
+    "AttackDamageMin"     "20"                   // Damage range min.
+    "AttackDamageMax"     "30"                   // Damage range max.
     "AttackRange"                   "100"
 
 
@@ -37,18 +39,17 @@
     //"RingRadius"        "70"
 
     "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"       "320"                 // Speed.
+    "MovementSpeed"       "360"                 // Speed.
     "MovementTurnRate"      "1.0"                 // Turning rate.
-    "AttackAcquisitionRange"        "0"
 
+    "StatusHealth"        "100"                 // Base health.
+    "StatusHealthRegen"     "5.0"                 // Health regeneration rate.
 
-    "StatusHealth"        "1"                 // Base health.
-    "StatusHealthRegen"     "0.0"                 // Health regeneration rate.
-    "StatusMana"        "1000"                   // Base mana.
-    "StatusManaRegen"     "100.0"                 // Mana regeneration rate.
+    "StatusMana"        "300"                   // Base mana.
+    "StatusManaRegen"     "1.0"                 // Mana regeneration rate.
 
-    "VisionDaytimeRange"    "1800"                  // Range of vision at night time.
-    "VisionNighttimeRange"    "1800"                  // Range of vision at night time.
+    "VisionDaytimeRange"    "1100"                  // Range of vision at night time.
+    "VisionNighttimeRange"    "800"     
   }
 
 "BountyHunter"
@@ -63,12 +64,12 @@
     "Ability5"        "barebones_empty5"
     "Ability6"        "bounty_hunter_track"
 
-   "ArmorPhysical"       "0"                 // Physical protection.
+    "ArmorPhysical"       "0"                 // Physical protection.
     "MagicalResistance"       "0"                 // Magical protection (percentage).
 
     "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-    "AttackDamageMin"     "1"                   // Damage range min.
-    "AttackDamageMax"     "1"                   // Damage range max.
+    "AttackDamageMin"     "20"                   // Damage range min.
+    "AttackDamageMax"     "30"                   // Damage range max.
     "AttackRange"                   "100"
 
 
@@ -88,16 +89,18 @@
     //"RingRadius"        "70"
 
     "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"       "320"                 // Speed.
+    "MovementSpeed"       "360"                 // Speed.
     "MovementTurnRate"      "1.0"                 // Turning rate.
 
-    "StatusHealth"        "1"                 // Base health.
-    "StatusHealthRegen"     "0.0"                 // Health regeneration rate.
-    "StatusMana"        "1000"                   // Base mana.
-    "StatusManaRegen"     "100.0"                 // Mana regeneration rate.
+    "StatusHealth"        "100"                 // Base health.
+    "StatusHealthRegen"     "5.0"                 // Health regeneration rate.
 
-    "VisionDaytimeRange"    "1800"                  // Range of vision at night time.
-    "VisionNighttimeRange"    "1800"      
+    "StatusMana"        "300"                   // Base mana.
+    "StatusManaRegen"     "1.0"                 // Mana regeneration rate.
+
+    "VisionDaytimeRange"    "1100"                  // Range of vision at night time.
+    "VisionNighttimeRange"    "800"      
+  
   }
 
 "Pudge"
@@ -116,8 +119,8 @@
     "MagicalResistance"       "0"                 // Magical protection (percentage).
 
     "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-    "AttackDamageMin"     "1"                   // Damage range min.
-    "AttackDamageMax"     "1"                   // Damage range max.
+    "AttackDamageMin"     "20"                   // Damage range min.
+    "AttackDamageMax"     "30"                   // Damage range max.
     "AttackRange"                   "100"
 
 
@@ -137,16 +140,17 @@
     //"RingRadius"        "70"
 
     "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"       "320"                 // Speed.
+    "MovementSpeed"       "360"                 // Speed.
     "MovementTurnRate"      "1.0"                 // Turning rate.
 
-    "StatusHealth"        "1"                 // Base health.
-    "StatusHealthRegen"     "0.0"                 // Health regeneration rate.
-    "StatusMana"        "1000"                   // Base mana.
-    "StatusManaRegen"     "100.0"                 // Mana regeneration rate.
+    "StatusHealth"        "100"                 // Base health.
+    "StatusHealthRegen"     "5.0"                 // Health regeneration rate.
 
-    "VisionDaytimeRange"    "1800"                  // Range of vision at night time.
-    "VisionNighttimeRange"    "1800"      
+    "StatusMana"        "300"                   // Base mana.
+    "StatusManaRegen"     "1.0"                 // Mana regeneration rate.
+
+    "VisionDaytimeRange"    "1100"                  // Range of vision at night time.
+    "VisionNighttimeRange"    "800"          
 
     }
 
@@ -166,8 +170,8 @@
     "MagicalResistance"       "0"                 // Magical protection (percentage).
 
     "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-    "AttackDamageMin"     "1"                   // Damage range min.
-    "AttackDamageMax"     "1"                   // Damage range max.
+    "AttackDamageMin"     "20"                   // Damage range min.
+    "AttackDamageMax"     "30"                   // Damage range max.
     "AttackRange"                   "100"
 
 
@@ -187,17 +191,17 @@
     //"RingRadius"        "70"
 
     "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"       "320"                 // Speed.
+    "MovementSpeed"       "360"                 // Speed.
     "MovementTurnRate"      "1.0"                 // Turning rate.
 
-    "StatusHealth"        "1"                 // Base health.
-    "StatusHealthRegen"     "0.0"                 // Health regeneration rate.
-    "StatusMana"        "1000"                   // Base mana.
-    "StatusManaRegen"     "100.0"                 // Mana regeneration rate.
+    "StatusHealth"        "100"                 // Base health.
+    "StatusHealthRegen"     "5.0"                 // Health regeneration rate.
 
-    "VisionDaytimeRange"    "1800"                  // Range of vision at night time.
-    "VisionNighttimeRange"    "1800"      
+    "StatusMana"        "300"                   // Base mana.
+    "StatusManaRegen"     "1.0"                 // Mana regeneration rate.
 
+    "VisionDaytimeRange"    "1100"                  // Range of vision at night time.
+    "VisionNighttimeRange"    "800"       
     }
 
 "Techies"
@@ -207,7 +211,7 @@
     "SoundSet"          "0" 
     "Ability1"        "ctf_windwalk"
     "Ability2"        "ctf_toss" 
-    "Ability3"        "techies_suicide" 
+    "Ability3"        "techies_proximity_mine" 
     "Ability4"        "barebones_empty4"
     "Ability5"        "barebones_empty5"
     "Ability6"        "techies_stasis_trap"
@@ -216,8 +220,8 @@
     "MagicalResistance"       "0"                 // Magical protection (percentage).
 
     "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-    "AttackDamageMin"     "1"                   // Damage range min.
-    "AttackDamageMax"     "1"                   // Damage range max.
+    "AttackDamageMin"     "20"                   // Damage range min.
+    "AttackDamageMax"     "30"                   // Damage range max.
     "AttackRange"                   "100"
 
 
@@ -237,16 +241,18 @@
     //"RingRadius"        "70"
 
     "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"       "320"                 // Speed.
+    "MovementSpeed"       "360"                 // Speed.
     "MovementTurnRate"      "1.0"                 // Turning rate.
 
-    "StatusHealth"        "1"                 // Base health.
-    "StatusHealthRegen"     "0.0"                 // Health regeneration rate.
-    "StatusMana"        "1000"                   // Base mana.
-    "StatusManaRegen"     "100.0"                 // Mana regeneration rate.
+    "StatusHealth"        "100"                 // Base health.
+    "StatusHealthRegen"     "5.0"                 // Health regeneration rate.
 
-    "VisionDaytimeRange"    "1800"                  // Range of vision at night time.
-    "VisionNighttimeRange"    "1800"      
+    "StatusMana"        "300"                   // Base mana.
+    "StatusManaRegen"     "1.0"                 // Mana regeneration rate.
+
+    "VisionDaytimeRange"    "1100"                  // Range of vision at night time.
+    "VisionNighttimeRange"    "800"       
+     
 
     }
 
@@ -262,12 +268,12 @@
     "Ability5"        "barebones_empty5"
     "Ability6"        "nyx_assassin_spiked_carapace"
 
-    "ArmorPhysical"       "0"                 // Physical protection.
+     "ArmorPhysical"       "0"                 // Physical protection.
     "MagicalResistance"       "0"                 // Magical protection (percentage).
 
     "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-    "AttackDamageMin"     "1"                   // Damage range min.
-    "AttackDamageMax"     "1"                   // Damage range max.
+    "AttackDamageMin"     "20"                   // Damage range min.
+    "AttackDamageMax"     "30"                   // Damage range max.
     "AttackRange"                   "100"
 
 
@@ -287,16 +293,17 @@
     //"RingRadius"        "70"
 
     "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"       "320"                 // Speed.
+    "MovementSpeed"       "360"                 // Speed.
     "MovementTurnRate"      "1.0"                 // Turning rate.
 
-    "StatusHealth"        "1"                 // Base health.
-    "StatusHealthRegen"     "0.0"                 // Health regeneration rate.
-    "StatusMana"        "1000"                   // Base mana.
-    "StatusManaRegen"     "100.0"                 // Mana regeneration rate.
+    "StatusHealth"        "100"                 // Base health.
+    "StatusHealthRegen"     "5.0"                 // Health regeneration rate.
 
-    "VisionDaytimeRange"    "1800"                  // Range of vision at night time.
-    "VisionNighttimeRange"    "1800"      
+    "StatusMana"        "300"                   // Base mana.
+    "StatusManaRegen"     "1.0"                 // Mana regeneration rate.
+
+    "VisionDaytimeRange"    "1100"                  // Range of vision at night time.
+    "VisionNighttimeRange"    "800"        
 
     }
 
@@ -312,12 +319,12 @@
     "Ability5"        "barebones_empty5"
     "Ability6"        "kunkka_x_marks_the_spot"
 
-    "ArmorPhysical"       "0"                 // Physical protection.
+      "ArmorPhysical"       "0"                 // Physical protection.
     "MagicalResistance"       "0"                 // Magical protection (percentage).
 
     "AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
-    "AttackDamageMin"     "1"                   // Damage range min.
-    "AttackDamageMax"     "1"                   // Damage range max.
+    "AttackDamageMin"     "20"                   // Damage range min.
+    "AttackDamageMax"     "30"                   // Damage range max.
     "AttackRange"                   "100"
 
 
@@ -337,16 +344,17 @@
     //"RingRadius"        "70"
 
     "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"       "320"                 // Speed.
+    "MovementSpeed"       "360"                 // Speed.
     "MovementTurnRate"      "1.0"                 // Turning rate.
 
-    "StatusHealth"        "1"                 // Base health.
-    "StatusHealthRegen"     "0.0"                 // Health regeneration rate.
-    "StatusMana"        "1000"                   // Base mana.
-    "StatusManaRegen"     "100.0"                 // Mana regeneration rate.
+    "StatusHealth"        "100"                 // Base health.
+    "StatusHealthRegen"     "5.0"                 // Health regeneration rate.
 
-    "VisionDaytimeRange"    "1800"                  // Range of vision at night time.
-    "VisionNighttimeRange"    "1800"      
+    "StatusMana"        "300"                   // Base mana.
+    "StatusManaRegen"     "1.0"                 // Mana regeneration rate.
+
+    "VisionDaytimeRange"    "1100"                  // Range of vision at night time.
+    "VisionNighttimeRange"    "800"        
 
     }
 

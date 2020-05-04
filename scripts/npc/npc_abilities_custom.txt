@@ -342,7 +342,7 @@
     "AbilityName"         "Windwalk"
     
     //Time
-    "AbilityCooldown"   "30 25 20"                  //Spaces separate what it does at separate levels
+    "AbilityCooldown"   "20 15 10"                  //Spaces separate what it does at separate levels
     "AbilityManaCost"   "100"
     
     //Properties
@@ -382,7 +382,7 @@
     "AbilitySound"          "Hero_Rattletrap.Power_Cogs"
     "AbilityType"         "DOTA_ABILITY_TYPE_ULTIMATE"
 
-        "MaxLevel"                      "3"
+        "MaxLevel"                      "1"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -394,7 +394,7 @@
     
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"       "80"
+    "AbilityManaCost"       "180"
     
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -403,12 +403,12 @@
       "01"
       { 
         "var_type"      "FIELD_FLOAT"
-        "duration"      "2.0 3.0 5.0"
+        "duration"      "4.0 5.0 6.0"
       }
       "02"
       { 
         "var_type"      "FIELD_INTEGER"
-        "damage"    "1 1 1"
+        "damage"    "0 0 0"
       }
       "03"
       { 
@@ -477,7 +477,7 @@
     "AbilityCastPoint"        "0.0"
 
     // Time
-    "AbilityCooldown"       "65"
+    "AbilityCooldown"       "25"
 
     // Cost
     "AbilityManaCost"       "150"
@@ -506,12 +506,12 @@
       "04"
       {
         "var_type"        "FIELD_INTEGER"
-        "bonus_damage_pct"    "20"
+        "bonus_damage_pct"    "0"
       }
       "05"
       {
         "var_type"          "FIELD_INTEGER"
-        "grow_bonus_damage_pct"   "35"
+        "grow_bonus_damage_pct"   "0"
       }
       "06"
       {
@@ -521,7 +521,7 @@
       "07"
       {
         "var_type"          "FIELD_INTEGER"
-        "toss_damage"       "75"
+        "toss_damage"       "0"
       }
 
     }
@@ -610,7 +610,7 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"       "1"
+    "AbilityManaCost"       "150"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -683,11 +683,11 @@
     
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"       "1"
+    "AbilityManaCost"       "100"
     
     // Damage.
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityDamage"         "0"
+    "AbilityDamage"         "0 0 0"
     
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -1146,6 +1146,7 @@
     }
   }
 
+
 //=================================================================================================================
   // Techies: Suicide Squad, Attack!
   //=================================================================================================================
@@ -1187,7 +1188,7 @@
       "02"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "damage"                                          "300"
+        "damage"                                          "100"
         "LinkedSpecialBonus"                              "special_bonus_unique_techies"
       }
       "03"
@@ -1198,7 +1199,7 @@
       "04"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "hp_cost"                                         "300"
+        "hp_cost"                                         "30"
       }
       "05"
       {
