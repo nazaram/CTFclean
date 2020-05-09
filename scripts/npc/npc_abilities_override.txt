@@ -13,11 +13,14 @@
 
   "item_blink"
   {
-    "AbilityCastRange"        "300"
+    "AbilityCastRange"        "600"
     "AbilityCastPoint"        "0.0"
     "AbilityCooldown"         "30.0"
     "ItemCost"                "5500"
+    "ItemShopTags"            "Secret Shop"
+    "ItemQuality"             "Secret Shop"   
   }
+
 
   "item_quelling_blade"
   {
@@ -29,7 +32,7 @@
 
     "AbilityCastRange"        "350"
     "AbilityCastPoint"        "0.0"
-    "AbilityCooldown"       "1.0"
+    "AbilityCooldown"       "1.5"
 
 
     // Item Info
@@ -67,14 +70,14 @@
     "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_TREE | DOTA_UNIT_TARGET_CUSTOM"
     "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_CUSTOM"
 
-    "AbilityCastRange"        "350"
+    "AbilityCastRange"        "650"
     "AbilityCastPoint"        "0.0"
     "AbilityCooldown"       "3.5"
 
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"            "1000"
+    "ItemCost"            "200"
     "ItemShopTags"          "damage;health_regen;mana_regen;hard_to_tag"
     "ItemQuality"         "epic"
     "ItemAliases"         "qb;quelling blade"
@@ -87,7 +90,7 @@
       "1"
       {
         "var_type"        "FIELD_INTEGER"
-        "cast_range_tooltip"      "350"
+        "cast_range_tooltip"      "650"
       }
       "2"
       {
@@ -107,7 +110,7 @@
     "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_TREE | DOTA_UNIT_TARGET_CUSTOM"
     "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_CUSTOM"
 
-    "AbilityCastRange"        "350"
+    "AbilityCastRange"        "800"
     "AbilityCastPoint"        "0.0"
     "AbilityCooldown"       "5.5"
 
@@ -127,7 +130,7 @@
       "1"
       {
         "var_type"        "FIELD_INTEGER"
-        "cast_range_tooltip"      "350"
+        "cast_range_tooltip"      "800"
       }
       "2"
       {
@@ -137,25 +140,58 @@
     }
   }
 
-  //"item_branches"     "REMOVE"
+  "item_branches"     
+  {
+  "ItemCost"            "1"
+  }
+
+
+
   //"item_staff_of_wizardry"      "REMOVE"
   //"item_ring_of_regen"      "REMOVE"
   //"item_ghost"      "REMOVE"
-  //"item_clarity"      "REMOVE"
+  "item_clarity"     
+  {
+  "ItemCost"            "10"
+  }
+
+  "item_tango"    
+  {
+  "ItemCost"            "5"
+  }
+
+
+  
+"item_recipe_force_staff"  
+ {
+  "ItemCost"            "100"
+ }
+
+
+"item_shadow_amulet"     
+ {
+  "ItemCost"            "800"
+ }
+
+
+"item_ward_sentry"      
+{
+  "ItemCost"            "5"
+ }
+
+
   //"item_dust"     "REMOVE"
   //"item_ward_observer"      "REMOVE"
-  //"item_ward_sentry"      "REMOVE"
-  //"item_tango"      "REMOVE"
+
   //"item_tango_single"     "REMOVE"
   //"item_ring_of_health"     "REMOVE"
   //"item_void_stone"     "REMOVE"
   //"item_recipe_pers"      "REMOVE"
   //"item_pers"     "REMOVE"
-  //"item_recipe_force_staff"     "REMOVE"
+
   //"item_force_staff"      "REMOVE"
   //"item_recipe_refresher"     "REMOVE"
   //"item_refresher"      "REMOVE"
-  //"item_shadow_amulet"      "REMOVE"
   
   "item_flask"      "REMOVE"
   "item_recipe_aeon_disk"     "REMOVE"

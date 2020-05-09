@@ -4,23 +4,63 @@ require('effect_modifiers')
 print("testjail0")
 
 
-function JailTriggered(trigger)
-  print("YO")
-    -- Get the position of the "point_teleport_spot"-entity we put in our map
---[[    local point =  Entities:FindByName( nil, "point_teleport_spot" ):GetAbsOrigin()
-   
-
-    if trigger.activator and trigger.activator:GetTeamNumber() == DOTA_TEAM_BADGUYS then
-      -- Find a spot for the hero around 'point' and teleports to it
-      FindClearSpaceForUnit(trigger.activator, point, false)
-      -- Stop the hero, so he doesn't move
-       trigger.activator:Stop()
-      -- Refocus the camera of said player to the position of the teleported hero.
-      SendToConsole("dota_camera_center")
-    end
-
---]]
+function BountyTriggered(trigger)
+  if trigger.activator and trigger.activator:GetTeamNumber() == DOTA_TEAM_BADGUYS then
+	  --local point1 = Entities:FindByName( nil, "point_teleport_spot1" ):GetAbsOrigin()
+    --FindClearSpaceForUnit(trigger.activator, point1, false)
+    --trigger.activator:Stop()
+    --SendToConsole("dota_camera_center")
+    trigger.activator:SetGold(trigger.activator:GetGold() + 50, false)
+    trigger.activator:AddExperience(50, DOTA_ModifyXP_Unspecified, false, false)
+  end
 end
+
+function BountyTriggered2(trigger)
+  if trigger.activator and trigger.activator:GetTeamNumber() == DOTA_TEAM_BADGUYS then
+    --local point2 = Entities:FindByName( nil, "point_teleport_spot2" ):GetAbsOrigin()
+    --FindClearSpaceForUnit(trigger.activator, point2, false)
+    --trigger.activator:Stop()
+    --SendToConsole("dota_camera_center")
+    trigger.activator:SetGold(trigger.activator:GetGold() + 50, false)
+    trigger.activator:AddExperience(50, DOTA_ModifyXP_Unspecified, false, false)
+  end
+end
+
+function BountyTriggered3(trigger)
+    print("In Trigger 3")
+   -- local point3 = Entities:FindByName(Vector(345.051, -4556.62, 143.059):GetAbsOrigin()
+    --FindClearSpaceForUnit(trigger.activator, Vector(345.051, 4556.62, 143.059), false)
+    --trigger.activator:Stop()
+    --SendToConsole("dota_camera_center")
+    trigger.activator:SetGold(trigger.activator:GetGold() + 50, false)
+    trigger.activator:AddExperience(50, DOTA_ModifyXP_Unspecified, false, false)
+end
+
+function BountyTriggered4(trigger)
+  if trigger.activator and trigger.activator:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
+    --print("in trigger 4")
+    --local point4 = Entities:FindByName( nil, Vector(1993.81, 3523.18, 283.178) ):GetAbsOrigin()
+    --FindClearSpaceForUnit(trigger.activator, Vector(1993.81, 3523.18, 283.178), false)
+    --trigger.activator:Stop()
+    --SendToConsole("dota_camera_center")
+    trigger.activator:SetGold(trigger.activator:GetGold() + 50, false)
+    trigger.activator:AddExperience(50, DOTA_ModifyXP_Unspecified, false, false)
+  end
+end
+
+function BountyTriggered5(trigger)
+  if trigger.activator and trigger.activator:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
+    --print("in trigger 5")
+    --local point5 = Entities:FindByName( nil, "point_teleport_spot5" ):GetAbsOrigin()
+    --FindClearSpaceForUnit(trigger.activator, Vector(3771.01, 4031.09, 162.295), false)
+    --trigger.activator:Stop()
+    --SendToConsole("dota_camera_center")
+    trigger.activator:SetGold(trigger.activator:GetGold() + 50, false)
+    trigger.activator:AddExperience(50, DOTA_ModifyXP_Unspecified, false, false)
+  end
+end
+
+
 
 function OnEndTouch(trigger)
 
@@ -41,6 +81,10 @@ function JailTriggeredDire(trigger)
       trigger.activator:Stop()
       -- Refocus the camera of said player to the position of the teleported hero.
       SendToConsole("dota_camera_center")
+      --local v = point
+--v.x = v.x + RandomInt(0,5)
+--v.y = v.y + RandomInt(0,5)
+
     end
  
 --]]
@@ -55,14 +99,19 @@ end
 function JailMuteDire(trigger)
     print("YAY1")
     if trigger.activator and trigger.activator:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
-    print("YAY2")
       trigger.activator:AddNewModifier(trigger.activator, nil, "modifier_invulnerable", nil)
       trigger.activator:AddNewModifier(trigger.activator, nil, "modifier_silence", nil)
       giveUnitDataDrivenModifier(trigger.activator, trigger.activator, "modifier_make_muted", nil)
-
       --giveUnitDataDrivenModifier(trigger.activator, trigger.activator, "modifier_make_muted", nil) -- "-1" means that it will last forever (or until its removed)
       trigger.activator:AddNewModifier(trigger.activator, nil, "modifier_disarmed", nil)
+      _G.GoodinPrison = _G.GoodinPrison + 1
+      print("Good in Prison is")
+      print (_G.GoodinPrison)
+      if _G.GoodinPrison == _G.GoodPlayers then
+        pointBad()
+        reset()
      end
+   end
   end
 
 
@@ -75,7 +124,9 @@ function JailMuteDire2(trigger)
     trigger.activator:RemoveModifierByName("modifier_silence")
     trigger.activator:RemoveModifierByName("modifier_disarmed")
     trigger.activator:RemoveModifierByName("modifier_make_muted")
-    end
+    _G.GoodinPrison = _G.GoodinPrison - 1
+    print("Bad in Prison is")
+   end
 end
 
 function JailMuteRadiant(trigger)
@@ -88,6 +139,12 @@ function JailMuteRadiant(trigger)
 
       --giveUnitDataDrivenModifier(trigger.activator, trigger.activator, "modifier_make_muted", nil) -- "-1" means that it will last forever (or until its removed)
       trigger.activator:AddNewModifier(trigger.activator, nil, "modifier_disarmed", nil)
+      _G.BadinPrison = _G.BadinPrison + 1
+      print (_G.BadinPrison)
+      if _G.BadinPrison == _G.BadPlayers then
+        pointGood()
+        reset()
+     end
      end
   end
 
@@ -101,6 +158,7 @@ function JailMuteRadiant2(trigger)
     trigger.activator:RemoveModifierByName("modifier_silence")
     trigger.activator:RemoveModifierByName("modifier_disarmed")
     trigger.activator:RemoveModifierByName("modifier_make_muted")
+    _G.BadinPrison = _G.BadinPrison - 1
     end
 end
 

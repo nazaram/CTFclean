@@ -5,17 +5,22 @@ function pickOrReturnGoodFlag(event)
   CustomGameEventManager:Send_ServerToAllClients( "Good Flag Taken", {})
   print("Good Flag Taken")
   print(unit:GetUnitName())
+  if unit:GetTeamNumber() == DOTA_TEAM_BADGUYS then
+    print('Bad Guys Took Good Flag')
+    GameRules:SendCustomMessage("Bad Guys Took the Enemy Flag!", DOTA_TEAM_NOTEAM, 0)    
+    _G.BadHasFlag = 1
+  end
   if unit:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
     print("Good Guy took Good Flag")
-    GameRules:SendCustomMessage("Good Guys Took The Flag", DOTA_TEAM_NOTEAM, 0)
+    GameRules:SendCustomMessage("good guys took their own flag. pls dont", DOTA_TEAM_NOTEAM, 0)
     for i = 0,5 do
       print("i:"..i)
       local item = unit:GetItemInSlot(i)
       if item then
-        print("item none:"..item:GetAbilityName())
+        print("item:"..item:GetAbilityName())
         if item:GetAbilityName() == "item_capture_good_flag" then
           unit:RemoveItem(item)
-          print("Good Guy Drop Good Flag")
+          print("good guy drop their own flag")
         end
       end
     end
@@ -26,7 +31,11 @@ end
 function pickOrReturnBadFlag(event)
   local unit = EntIndexToHScript(event.caster_entindex)
   print("Bad Flag Taken")
-  message = "Someone stole a flag from Dire base!"
+  if unit:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
+    GameRules:SendCustomMessage("Good Guys Took the Enemy Flag!", DOTA_TEAM_NOTEAM, 0)    
+    print('Good Guys Took Good Flag')
+    _G.GoodHasFlag = 1
+  end
   EmitGlobalSound("compendium_levelup")
   print(unit:GetUnitName())
   if unit:GetTeamNumber() == DOTA_TEAM_BADGUYS then

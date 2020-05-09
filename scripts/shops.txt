@@ -68,9 +68,8 @@
 	{							
 		"item"		"item_ring_of_health"
 		"item"		"item_void_stone"
-		"item"		"item_ghost"
-
-		"item"		"item_pers"
+		//"item"		"item_ghost"
+		//"item"		"item_pers"
 		"item"		"item_recipe_force_staff"
 		"item"		"item_force_staff"
 		"item"		"item_recipe_refresher"

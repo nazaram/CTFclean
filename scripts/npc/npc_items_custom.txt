@@ -257,6 +257,7 @@
 
 //==============================================================================================
   // Good Flag
+  // idea: make flag moveable by making a unit (like healing ward) that dies in 1 right click and adds flag to ur inventory
   //==============================================================================================
   "item_capture_good_flag"
   {
@@ -280,6 +281,8 @@
     "ItemDeclarations"            "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS | DECLARE_PURCHASES_IN_SPEECH"
     "ItemContributesToNetWorthWhenDropped"    "0"
     "ItemDroppable"                           "1"
+    "AllowedInBackpack"                "0"
+
 
     "OnSpellStart"
     {
@@ -311,7 +314,8 @@
       "the_weight_good_flag"
       {
         "Passive"           "1"
-        "EffectName"        "particles/econ/courier/courier_golden_roshan/golden_roshan_ambient.vpcf"
+        "EffectName"        "particles/units/heroes/hero_medusa/medusa_mana_shield.vpcf"
+
         "EffectAttachType"  "follow_origin"
 
         "Properties"
@@ -325,7 +329,7 @@
       "01"
       {
         "var_type"          "FIELD_INTEGER"
-        "movespeed_bonus"    "-30"
+        "movespeed_bonus"    "-55"
       }
     }
   }
@@ -353,6 +357,7 @@
     "ItemDeclarations"    "DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_TO_SPECTATORS | DECLARE_PURCHASES_IN_SPEECH"
     "ItemContributesToNetWorthWhenDropped"  "0"
     "ItemDroppable"                           "1"
+    "AllowedInBackpack"                "0"
 
     "OnSpellStart"
     {
@@ -384,7 +389,7 @@
       "the_weight_bad_flag"
       {
         "Passive"           "1"
-        "EffectName"        "particles/econ/courier/courier_golden_roshan/golden_roshan_ambient.vpcf"
+        "EffectName"        "particles/units/heroes/hero_medusa/medusa_mana_shield.vpcf"
         "EffectAttachType"  "follow_origin"
 
         "Properties"
@@ -398,7 +403,7 @@
       "01"
       {
         "var_type"          "FIELD_INTEGER"
-        "movespeed_bonus"   "-30"
+        "movespeed_bonus"   "-55"
       }
     }
   }

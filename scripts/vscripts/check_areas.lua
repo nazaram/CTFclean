@@ -9,12 +9,18 @@ function enterGoodArea(trigger)
   if unit:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
     unit:AddNewModifier(unit, nil, "modifier_magic_immune", {})
     unit:AddNewModifier(unit, nil, "modifier_attack_immune", {})
+    --unit:AddNewModifier(unit, nil, "modifier_atta", {})
     for i = 0,5 do
       local item = unit:GetItemInSlot(i)
       if item then
         if item:GetAbilityName() == "item_capture_bad_flag" then
           unit:RemoveModifierByName("modifier_magic_immune")
           unit:RemoveModifierByName("modifier_attack_immune")
+        end
+        if item:GetAbilityName() == "item_capture_good_flag" then
+          unit:RemoveItem(item)
+          print("good guy drop their own flag")   
+          spawnGoodFlag()
         end
       end
      end
@@ -35,6 +41,11 @@ function enterBadArea(trigger)
         if item:GetAbilityName() == "item_capture_good_flag" then
           unit:RemoveModifierByName("modifier_magic_immune")
           unit:RemoveModifierByName("modifier_attack_immune")
+        end
+        if item:GetAbilityName() == "item_capture_bad_flag" then
+          unit:RemoveItem(item)
+          print("bad guy drop their own flag")     
+          spawnBadFlag()
         end
       end
      end
@@ -62,6 +73,12 @@ end
 
 function enterGoodAreaBack(trigger)
   local unit = trigger.activator
+  if _G.BadHasFlag == 1 then
+    print("g kill b first pls")
+    GameRules:SendCustomMessage("You Must Kill The Enemy Flag Holder Before Turning In a Flag", DOTA_TEAM_NOTEAM, 0)
+    return
+  end
+
   if unit:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
     for i = 0,5 do
       local item = unit:GetItemInSlot(i)
@@ -85,6 +102,13 @@ end
 
 function enterBadAreaBack(trigger)
   local unit = trigger.activator
+
+    if _G.GoodHasFlag == 1 then
+    print("b kill g first pls")
+    GameRules:SendCustomMessage("You Must Kill The Enemy Flag Holder Before Turning In a Flag", DOTA_TEAM_NOTEAM, 0)
+    return
+  end
+
   if unit:GetTeamNumber() == DOTA_TEAM_BADGUYS then
     for i = 0,5 do
       local item = unit:GetItemInSlot(i)

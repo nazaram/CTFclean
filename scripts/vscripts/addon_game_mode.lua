@@ -25,6 +25,10 @@ if CONSTANTS == nil then
   -- assist is save a friend
 end
 
+_G.GoodHasFlag = 0
+_G.BadHasFlag = 0
+
+
 _G.GAME_ROUND = 1
 _G.GAME_ROUND1experiencelose = 250
 _G.GAME_ROUND1experiencewin = 300
@@ -86,7 +90,11 @@ _G.GAME_ROUND19experiencewin = 1070
 _G.GAME_ROUND20experiencelose = 1000
 _G.GAME_ROUND20experiencewin = 1200
 
+_G.GoodPlayers = 0
+_G.BadPlayers = 0
 
+_G.GoodinPrison = 0
+_G.BadinPrison = 0
 
 
 function Precache( context )
@@ -107,28 +115,69 @@ end
 
 function CAddonTemplateGameMode:InitGameMode()
   print( "Template addon is loaded." )
-	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 2 )
-	GameMode = GameRules:GetGameModeEntity()
-  	--Override the values of the team values on the top game bar.
+  local GameMode = GameRules:GetGameModeEntity()
+  --Override the values of the team values on the top game bar.
+  GameMode:SetPauseEnabled(true)
+  GameMode:SetCustomScanCooldown(30) 
+  --GameMode:SetUseCustomHeroLevels(true)
+  GameMode:SetCustomHeroMaxLevel(10) 
+  --GameMode:SetGoldPerTick(10.0) 
+  --GameMode:SetGoldTickTime(1.0)
+
+  GameMode:SetTopBarTeamValue(DOTA_TEAM_GOODGUYS, 2)
+  GameMode:SetTopBarTeamValue(DOTA_TEAM_BADGUYS, 0)
   GameMode:SetTopBarTeamValuesOverride(true)
- 	GameMode:SetTopBarTeamValuesVisible(true)
-  GameMode:SetTopBarTeamValue(DOTA_TEAM_GOODGUYS, 0)
-	GameMode:SetTopBarTeamValue(DOTA_TEAM_BADGUYS, 0)
+  GameMode:SetTopBarTeamValuesVisible(false)
+
   GameMode:SetRecommendedItemsDisabled(true)
 	
-  spawnGoodFlag()
-  spawnBadFlag()
-  print(" Gamemode rules are set.")
-  
+  GameRules:SetTreeRegrowTime(100)
+  GameRules:SetStartingGold(400)
+  GameRules:SetUseUniversalShopMode(false) 
+  GameRules:SetSameHeroSelectionEnabled(true)
   GameRules:SendCustomMessage("Welcome To Capture The Flag Alpha by buymyhat.com", DOTA_TEAM_NOTEAM, 0)
   GameRules:GetGameModeEntity():SetThink("OnThink", self, "GlobalThink", 2)
-  
+  print(" Gamemode rules are set.")
+
   ListenToGameEvent('npc_spawned', Dynamic_Wrap(CAddonTemplateGameMode, 'OnNPCSpawned'), self)
   ListenToGameEvent('entity_hurt', Dynamic_Wrap(CAddonTemplateGameMode, 'OnEntityHurt'), self)
   ListenToGameEvent("entity_killed", Dynamic_Wrap(CAddonTemplateGameMode, "OnEntityKilled"), self)
+  ListenToGameEvent("dota_player_pick_hero", OnHeroPicked, nil)
+
   --GameRules:GetGameModeEntity():SetItemAddedToInventoryFilter( Dynamic_Wrap(CAddonAdvExGameMode, "ItemAddedFilter"), self )
 
+  spawnGoodFlag()
+  spawnBadFlag()
+
+  GameRules:GetGameModeEntity():SetThink("OnThink", self, "GlobalThink", 2)
+
 end
+
+ function OnHeroPicked (event)
+    local hero = EntIndexToHScript(event.heroindex)
+
+    if hero:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
+      _G.GoodPlayers = _G.GoodPlayers + 1
+    end
+
+    if hero:GetTeamNumber() == DOTA_TEAM_BADGUYS then
+      _G.BadPlayers =   _G.BadPlayers + 1
+    end
+    
+    print("Good Players:")
+    print(_G.GoodPlayers)
+    
+    print("Bad Players:")
+    print(_G.BadPlayers)
+
+
+    if hero:HasRoomForItem("item_quelling_blade", true, true) then
+       local blade = CreateItem("item_quelling_blade", hero, hero)
+       blade:SetPurchaseTime(0)
+       hero:AddItem(blade)
+    end
+ end
+
 
 -- Evaluate the state of the game
 function CAddonTemplateGameMode:OnThink()
@@ -146,7 +195,7 @@ function spawnGoodFlag()
 --  CreateItemOnPositionSync(Vector(-1822.81, -636.813, 128), flag)
   local flag = CreateItem("item_capture_good_flag", nil, nil)
   CreateItemOnPositionSync(Vector(-3303.79, 1382.76, 128), flag)
-
+  _G.BadHasFlag = 0
 
 end
 
@@ -156,9 +205,7 @@ function spawnBadFlag()
   --CreateItemOnPositionSync(Vector(-153.281, 2337.62, 128), flag)
   local flag = CreateItem("item_capture_bad_flag", nil, nil)
   CreateItemOnPositionSync(Vector(4091.37, 1269.95, 128), flag)
-
-
-
+   _G.GoodHasFlag = 0
 end
 
 
@@ -250,8 +297,16 @@ function CAddonTemplateGameMode:OnEntityHurt(tbl)
   --DebugPrint("[BAREBONES] Entity Hurt")
   --DebugPrintTable(keys)
   print( "SOMEONE GOT HURT" )
+
   local victim = EntIndexToHScript(tbl.entindex_killed)
   local attacker = EntIndexToHScript(tbl.entindex_attacker)
+
+  
+  attacker:EmitSound("Hero_Abaddon.AphoticShield.Destroy")
+  victim:EmitSound("DOTA_Item.Dagon5.Target")
+
+
+
 
   if attacker:IsHero() then
     attacker:AddExperience(30 + _G.GAME_ROUND * 5, DOTA_ModifyXP_Unspecified, false, false)
@@ -307,13 +362,27 @@ end
 
 
 function updateScore(scoreGood, scoreBad)
+  
+   local score_obj = 
+    {
+        radi_score = scoreGood,
+        dire_score = scoreBad
+    }
+    
+    CustomGameEventManager:Send_ServerToAllClients( "refresh_score", score_obj )
+
   print("Updating score: " .. scoreGood .. " x " .. scoreBad)
 
-  local CAddonTemplateGameMode = GameRules:GetGameModeEntity()
+  local GameMode  = GameRules:GetGameModeEntity()
+
+  GameMode:SetTopBarTeamValue(DOTA_TEAM_GOODGUYS, scoreGood) 
+  GameMode:SetTopBarTeamValue(DOTA_TEAM_BADGUYS, scoreBad) 
+
+
   --GameMode:SetTopBarTeamValue(DOTA_TEAM_GOODGUYS, scoreGood)
   --GameMode:SetTopBarTeamValue(DOTA_TEAM_BADGUYS, scoreBad)
-  GameRules:GetGameModeEntity():SetTopBarTeamValue(DOTA_TEAM_GOODGUYS, scoreGood)
-  GameRules:GetGameModeEntity():SetTopBarTeamValue(DOTA_TEAM_BADGUYS, scoreBad)
+ -- GameRules:GetGameModeEntity():SetTopBarTeamValue(DOTA_TEAM_GOODGUYS, scoreGood)
+  --GameRules:GetGameModeEntity():SetTopBarTeamValue(DOTA_TEAM_BADGUYS, scoreBad)
 
   -- If any team reaches scoreToWin, the game ends and that team is considered winner.
   if scoreGood == CONSTANTS.scoreToWin then
@@ -325,6 +394,10 @@ function updateScore(scoreGood, scoreBad)
     GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
   end
 end
+
+
+
+ 
 
 
 --[[
@@ -403,6 +476,8 @@ function pointBad()
     GameRules:SendCustomMessage("Bad Guys Scored", DOTA_TEAM_NOTEAM, 0)
     score.Bad = score.Bad + 1
     updateScore(score.Good, score.Bad)
+    EmitGlobalSound("DOTA_Item.ShivasGuard.Activate")
+
 end
 
 function pointGood()
@@ -410,9 +485,8 @@ function pointGood()
     GameRules:SendCustomMessage("Good Guys Scored", DOTA_TEAM_NOTEAM, 0)
     score.Good = score.Good + 1
     updateScore(score.Good, score.Bad)
+    EmitGlobalSound("Tutorial.Quest.complete_01")
 end
-
-
 
 
 
