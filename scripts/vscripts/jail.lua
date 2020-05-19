@@ -10,7 +10,7 @@ function BountyTriggered(trigger)
     --FindClearSpaceForUnit(trigger.activator, point1, false)
     --trigger.activator:Stop()
     --SendToConsole("dota_camera_center")
-    trigger.activator:SetGold(trigger.activator:GetGold() + 50, false)
+    trigger.activator:SetGold(trigger.activator:GetGold() + 25 + _G.GAME_ROUND * 10, false)
     trigger.activator:AddExperience(50, DOTA_ModifyXP_Unspecified, false, false)
   end
 end
@@ -21,7 +21,7 @@ function BountyTriggered2(trigger)
     --FindClearSpaceForUnit(trigger.activator, point2, false)
     --trigger.activator:Stop()
     --SendToConsole("dota_camera_center")
-    trigger.activator:SetGold(trigger.activator:GetGold() + 50, false)
+    trigger.activator:SetGold(trigger.activator:GetGold() + 25 + _G.GAME_ROUND * 10, false)
     trigger.activator:AddExperience(50, DOTA_ModifyXP_Unspecified, false, false)
   end
 end
@@ -32,7 +32,7 @@ function BountyTriggered3(trigger)
     --FindClearSpaceForUnit(trigger.activator, Vector(345.051, 4556.62, 143.059), false)
     --trigger.activator:Stop()
     --SendToConsole("dota_camera_center")
-    trigger.activator:SetGold(trigger.activator:GetGold() + 50, false)
+    trigger.activator:SetGold(trigger.activator:GetGold() + 25 + _G.GAME_ROUND * 10, false)
     trigger.activator:AddExperience(50, DOTA_ModifyXP_Unspecified, false, false)
 end
 
@@ -43,7 +43,7 @@ function BountyTriggered4(trigger)
     --FindClearSpaceForUnit(trigger.activator, Vector(1993.81, 3523.18, 283.178), false)
     --trigger.activator:Stop()
     --SendToConsole("dota_camera_center")
-    trigger.activator:SetGold(trigger.activator:GetGold() + 50, false)
+    trigger.activator:SetGold(trigger.activator:GetGold() + 25 + _G.GAME_ROUND * 10, false)
     trigger.activator:AddExperience(50, DOTA_ModifyXP_Unspecified, false, false)
   end
 end
@@ -55,7 +55,7 @@ function BountyTriggered5(trigger)
     --FindClearSpaceForUnit(trigger.activator, Vector(3771.01, 4031.09, 162.295), false)
     --trigger.activator:Stop()
     --SendToConsole("dota_camera_center")
-    trigger.activator:SetGold(trigger.activator:GetGold() + 50, false)
+    trigger.activator:SetGold(trigger.activator:GetGold() + 25 + _G.GAME_ROUND * 10, false)
     trigger.activator:AddExperience(50, DOTA_ModifyXP_Unspecified, false, false)
   end
 end
@@ -96,36 +96,48 @@ function JailTriggeredDire2(trigger)
 end
 
 
+-- when good enters bad jail  
 function JailMuteDire(trigger)
     print("YAY1")
     if trigger.activator and trigger.activator:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
+      trigger.activator:AddNewModifier(nil, nil, "modifier_stunned", {duration = 1})
       trigger.activator:AddNewModifier(trigger.activator, nil, "modifier_invulnerable", nil)
       trigger.activator:AddNewModifier(trigger.activator, nil, "modifier_silence", nil)
       giveUnitDataDrivenModifier(trigger.activator, trigger.activator, "modifier_make_muted", nil)
       --giveUnitDataDrivenModifier(trigger.activator, trigger.activator, "modifier_make_muted", nil) -- "-1" means that it will last forever (or until its removed)
       trigger.activator:AddNewModifier(trigger.activator, nil, "modifier_disarmed", nil)
       _G.GoodinPrison = _G.GoodinPrison + 1
-      print("Good in Prison is")
+      print("Good Joined Prison. Prison Count is")
       print (_G.GoodinPrison)
       if _G.GoodinPrison == _G.GoodPlayers then
+        GameRules:SendCustomMessage("<font color='#ff0000'>All Good Players Have Been Jailed!</font>", DOTA_TEAM_NOTEAM, 0)
         pointBad()
         reset()
+        _G.GoodinPrison = 0
+        _G.BadinPrison = 0  
      end
    end
   end
 
 
-
+--when good leaves bad jail 
 function JailMuteDire2(trigger)
+     if _G.GoodinPrison < 0 then 
+        _G.GoodinPrison = 0 
+    end
     print(trigger.activator)
     print(trigger.caller)
-    if trigger.activator then
-    trigger.activator:RemoveModifierByName("modifier_invulnerable")
-    trigger.activator:RemoveModifierByName("modifier_silence")
-    trigger.activator:RemoveModifierByName("modifier_disarmed")
-    trigger.activator:RemoveModifierByName("modifier_make_muted")
-    _G.GoodinPrison = _G.GoodinPrison - 1
-    print("Bad in Prison is")
+    if trigger.activator and trigger.activator:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
+      trigger.activator:RemoveModifierByName("modifier_invulnerable")
+      trigger.activator:RemoveModifierByName("modifier_silence")
+      trigger.activator:RemoveModifierByName("modifier_disarmed")
+      trigger.activator:RemoveModifierByName("modifier_make_muted")
+      _G.GoodinPrison = _G.GoodinPrison - 1
+      if _G.GoodinPrison < 0 then 
+        _G.GoodinPrison = 0 
+      end
+      print("Good Left Prison. Prison Count is:")
+      print (_G.GoodinPrison)
    end
 end
 
@@ -133,6 +145,7 @@ function JailMuteRadiant(trigger)
     print("YAY1")
     if trigger.activator and trigger.activator:GetTeamNumber() == DOTA_TEAM_BADGUYS then
     print("YAY2")
+      trigger.activator:AddNewModifier(nil, nil, "modifier_stunned", {duration = 1})
       trigger.activator:AddNewModifier(trigger.activator, nil, "modifier_invulnerable", nil)
       trigger.activator:AddNewModifier(trigger.activator, nil, "modifier_silence", nil)
       giveUnitDataDrivenModifier(trigger.activator, trigger.activator, "modifier_make_muted", nil)
@@ -140,26 +153,36 @@ function JailMuteRadiant(trigger)
       --giveUnitDataDrivenModifier(trigger.activator, trigger.activator, "modifier_make_muted", nil) -- "-1" means that it will last forever (or until its removed)
       trigger.activator:AddNewModifier(trigger.activator, nil, "modifier_disarmed", nil)
       _G.BadinPrison = _G.BadinPrison + 1
+      print("Bad Joined Prison. Prison Count is")
       print (_G.BadinPrison)
       if _G.BadinPrison == _G.BadPlayers then
+        GameRules:SendCustomMessage("<font color='#b20000'> All Bad Players Have Been Jailed! </font>", DOTA_TEAM_NOTEAM, 0)
         pointGood()
         reset()
+        _G.GoodinPrison = 0
+        _G.BadinPrison = 0  
      end
-     end
+   end
   end
+
 
 
 
 function JailMuteRadiant2(trigger)
     print(trigger.activator)
     print(trigger.caller)
-    if trigger.activator then
-    trigger.activator:RemoveModifierByName("modifier_invulnerable")
-    trigger.activator:RemoveModifierByName("modifier_silence")
-    trigger.activator:RemoveModifierByName("modifier_disarmed")
-    trigger.activator:RemoveModifierByName("modifier_make_muted")
-    _G.BadinPrison = _G.BadinPrison - 1
+    if trigger.activator and trigger.activator:GetTeamNumber() == DOTA_TEAM_BADGUYS then
+    	trigger.activator:RemoveModifierByName("modifier_invulnerable")
+    	trigger.activator:RemoveModifierByName("modifier_silence")
+    	trigger.activator:RemoveModifierByName("modifier_disarmed")
+    	trigger.activator:RemoveModifierByName("modifier_make_muted")
+    	_G.BadinPrison = _G.BadinPrison - 1
     end
+    if _G.BadinPrison < 0 then 
+        _G.BadinPrison = 0 
+    end
+    print("Good Left Prison. Prison Count is:")
+    print (_G.BadinPrison)
 end
 
 

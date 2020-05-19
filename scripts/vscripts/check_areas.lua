@@ -1,31 +1,42 @@
 require('addon_game_mode')
 
 
+
 function enterGoodArea(trigger)
   local unit = trigger.activator
   print("Enter Good")
   print(unit:GetUnitName())
   print(unit:GetTeamNumber())
+  
+
   if unit:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
-    unit:AddNewModifier(unit, nil, "modifier_magic_immune", {})
+--  unit:AddNewModifier(unit, nil, "modifier_magic_immune", {})
     unit:AddNewModifier(unit, nil, "modifier_attack_immune", {})
+    local ModMaster = CreateItem("item_modifier_master", nil, nil) 
+    ModMaster:ApplyDataDrivenModifier(unit, unit, "modifier_custom", nil)
+    unit:AddNewModifier(unit, unit, "modifier_status_resistance", nil) --[[Returns:void
+    No Description Set
+    ]]
     --unit:AddNewModifier(unit, nil, "modifier_atta", {})
     for i = 0,5 do
       local item = unit:GetItemInSlot(i)
       if item then
         if item:GetAbilityName() == "item_capture_bad_flag" then
-          unit:RemoveModifierByName("modifier_magic_immune")
+          --unit:RemoveModifierByName("modifier_magic_immune")
           unit:RemoveModifierByName("modifier_attack_immune")
+          unit:RemoveModifierByName("modifier_custom") 
+          unit:RemoveModifierByName('modifier_status_resistance')
         end
-        if item:GetAbilityName() == "item_capture_good_flag" then
-          unit:RemoveItem(item)
-          print("good guy drop their own flag")   
-          spawnGoodFlag()
-        end
+        --if item:GetAbilityName() == "item_capture_good_flag" then
+         -- unit:RemoveItem(item)
+         -- print("good guy drop their own flag")   
+          --spawnGoodFlag()
+        --end
       end
      end
   end
 end
+
 
 function enterBadArea(trigger)
   local unit = trigger.activator
@@ -33,20 +44,25 @@ function enterBadArea(trigger)
   print(unit:GetUnitName())
   print(unit:GetTeamNumber())
   if unit:GetTeamNumber() == DOTA_TEAM_BADGUYS then
-    unit:AddNewModifier(unit, nil, "modifier_magic_immune", {})
+    --unit:AddNewModifier(unit, nil, "modifier_magic_immune", {})
     unit:AddNewModifier(unit, nil, "modifier_attack_immune", {})
+    local ModMaster = CreateItem("item_modifier_master", nil, nil) 
+    ModMaster:ApplyDataDrivenModifier(unit, unit, "modifier_custom", nil)
+    unit:AddNewModifier(unit, unit, "modifier_status_resistance", nil) 
     for i = 0,5 do
       local item = unit:GetItemInSlot(i)
       if item then
         if item:GetAbilityName() == "item_capture_good_flag" then
-          unit:RemoveModifierByName("modifier_magic_immune")
+          --unit:RemoveModifierByName("modifier_magic_immune")
           unit:RemoveModifierByName("modifier_attack_immune")
+          unit:RemoveModifierByName("modifier_custom") 
+          unit:RemoveModifierByName('modifier_status_resistance')
         end
-        if item:GetAbilityName() == "item_capture_bad_flag" then
-          unit:RemoveItem(item)
-          print("bad guy drop their own flag")     
-          spawnBadFlag()
-        end
+        --if item:GetAbilityName() == "item_capture_bad_flag" then
+         -- unit:RemoveItem(item)
+         -- print("bad guy drop their own flag")     
+         -- spawnBadFlag()
+        --end
       end
      end
   end
@@ -55,29 +71,99 @@ end
 
 function leaveGoodArea(trigger)
   local unit = trigger.activator
+
+--[[
   if unit:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
-    unit:RemoveModifierByName("modifier_magic_immune")
+    for i = 0,5 do
+      local item = unit:GetItemInSlot(i)
+      if item then
+        if item:GetAbilityName() == "item_capture_good_flag" then
+          unit:RemoveItem(item)
+          spawnGoodFlag()
+          print("good guy drop their own flag")
+        end
+      end
+    end
+  end
+--]]
+
+  if unit:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
+  --  unit:RemoveModifierByName("modifier_magic_immune")
     unit:RemoveModifierByName("modifier_attack_immune")
+    unit:RemoveModifierByName("modifier_custom")           
+    unit:RemoveModifierByName('modifier_status_resistance')
   end
 end
-
-
 
 function leaveBadArea(trigger)
   local unit = trigger.activator
   if unit:GetTeamNumber() == DOTA_TEAM_BADGUYS then
-    unit:RemoveModifierByName("modifier_magic_immune")
+  --  unit:RemoveModifierByName("modifier_magic_immune")
     unit:RemoveModifierByName("modifier_attack_immune")
+    unit:RemoveModifierByName("modifier_custom")           
+    unit:RemoveModifierByName('modifier_status_resistance')
   end
 end
+
+
+
+--FORCE PLAYER TO DROP THEIR OWN FLAG 
+
+function leaveGoodAreaBack(trigger)
+  local unit = trigger.activator
+  if unit:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
+    for i = 0,5 do
+      local item = unit:GetItemInSlot(i)
+      if item then
+        if item:GetAbilityName() == "item_capture_good_flag" then
+          unit:RemoveItem(item)
+          local ent = Entities:FindByName( nil, "point_teleport_jail_dire" ):GetAbsOrigin()
+          FindClearSpaceForUnit(unit, ent, false)
+          unit:Stop()
+          spawnGoodFlag()
+          print("good guy drop their own flag")
+        end
+      end
+    end
+  end
+end
+
+
+function leavBadAreaBack(trigger)
+  local unit = trigger.activator
+  if unit:GetTeamNumber() == DOTA_TEAM_BADGUYS then
+    for i = 0,5 do
+      local item = unit:GetItemInSlot(i)
+      if item then
+        if item:GetAbilityName() == "item_capture_bad_flag" then
+          unit:RemoveItem(item)
+          local ent = Entities:FindByName( nil, "point_teleport_jail_radiant" ):GetAbsOrigin()
+          FindClearSpaceForUnit(unit, ent, false)
+          unit:Stop()
+          spawnBadFlag()
+          print("bad guy drop their own flag")
+        end
+      end
+    end
+  end
+end
+
+
+
+
+
+
+
+--REWARDS FOR RETURNING THE FLAG
 
 function enterGoodAreaBack(trigger)
   local unit = trigger.activator
   if _G.BadHasFlag == 1 then
     print("g kill b first pls")
-    GameRules:SendCustomMessage("You Must Kill The Enemy Flag Holder Before Turning In a Flag", DOTA_TEAM_NOTEAM, 0)
+    GameRules:SendCustomMessage("<font color='#404040'>You Must Kill The Enemy Flag Holder Before Turning In a Flag</font>", DOTA_TEAM_NOTEAM, 0)
     return
   end
+  
 
   if unit:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
     for i = 0,5 do
@@ -86,8 +172,8 @@ function enterGoodAreaBack(trigger)
         if item:GetAbilityName() == "item_capture_bad_flag" then
           unit:RemoveItem(item)
           spawnBadFlag()
+          GameRules:SendCustomMessage("<font color='#b20000'> Good Guys Captured the Flag! </font>", DOTA_TEAM_NOTEAM, 0)
           pointGood()
-         -- point(CONSTANTS.goodGuysHero)
           unit:IncrementDenies()
           reset()
           rewardGoodWin()
@@ -102,10 +188,9 @@ end
 
 function enterBadAreaBack(trigger)
   local unit = trigger.activator
-
     if _G.GoodHasFlag == 1 then
     print("b kill g first pls")
-    GameRules:SendCustomMessage("You Must Kill The Enemy Flag Holder Before Turning In a Flag", DOTA_TEAM_NOTEAM, 0)
+    GameRules:SendCustomMessage("<font color='#404040'>You Must Kill The Enemy Flag Holder Before Turning In a Flag </font>", DOTA_TEAM_NOTEAM, 0)
     return
   end
 
@@ -115,8 +200,8 @@ function enterBadAreaBack(trigger)
       if item then
         if item:GetAbilityName() == "item_capture_good_flag" then
           unit:RemoveItem(item)
+          GameRules:SendCustomMessage("<font color='#ff0000'>Bad Guys Captured the Flag! </font>", DOTA_TEAM_NOTEAM, 0)
           pointBad()
-          --point(CONSTANTS.badGuysHero)
           unit:IncrementDenies()
           spawnGoodFlag()
           reset()

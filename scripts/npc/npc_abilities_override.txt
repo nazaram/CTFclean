@@ -11,15 +11,48 @@
   
   //"item_quelling_blade"     "REMOVE"
 
+
+  "item_gloves"
+  {
+    "ItemCost"            "235"
+  }
+
+  "item_boots"
+  {
+    "ItemCost"            "1100"
+  }
+
+"item_refresher"
+{
+  "SecretShop" "1"
+}
+
+
+
+"item_dust"
+{
+      "ItemCost"            "50"
+}
+
+  
+
   "item_blink"
   {
-    "AbilityCastRange"        "600"
+    "AbilityCastRange"        "700"
     "AbilityCastPoint"        "0.0"
     "AbilityCooldown"         "30.0"
-    "ItemCost"                "5500"
+    "ItemCost"                "1600"
     "ItemShopTags"            "Secret Shop"
-    "ItemQuality"             "Secret Shop"   
+    "ItemQuality"             "Secret Shop"
+    "SecretShop" "1" 
   }
+
+  "item_hyperstone"
+  {
+    "ItemCost"            "600"
+    "SecretShop" "1" 
+  }
+
 
 
   "item_quelling_blade"
@@ -37,7 +70,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"            "100"
+    "ItemCost"            "50"
     "ItemShopTags"          "damage;health_regen;mana_regen;hard_to_tag"
     "ItemQuality"         "epic"
     "ItemAliases"         "qb;quelling blade"
@@ -110,14 +143,14 @@
     "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_TREE | DOTA_UNIT_TARGET_CUSTOM"
     "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_CUSTOM"
 
-    "AbilityCastRange"        "800"
+    "AbilityCastRange"        "400"
     "AbilityCastPoint"        "0.0"
     "AbilityCooldown"       "5.5"
 
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"            "1500"
+    "ItemCost"            "600"
     "ItemShopTags"          "damage;health_regen;mana_regen;hard_to_tag"
     "ItemQuality"         "epic"
     "ItemAliases"         "qb;quelling blade"
@@ -142,7 +175,8 @@
 
   "item_branches"     
   {
-  "ItemCost"            "1"
+  "ItemCost"            "10"
+  "AbilityCastRange"        "3000"
   }
 
 
@@ -152,32 +186,54 @@
   //"item_ghost"      "REMOVE"
   "item_clarity"     
   {
-  "ItemCost"            "10"
+  "ItemCost"            "15"
   }
 
   "item_tango"    
   {
-  "ItemCost"            "5"
+  "ItemCost"            "250"
   }
+    
+  "item_ghost"
+  {
+  "ItemCost"            "1200"
+  "SecretShop"            "1" 
+  }    
 
 
   
 "item_recipe_force_staff"  
  {
   "ItemCost"            "100"
+  "SecretShop" "1" 
  }
+
 
 
 "item_shadow_amulet"     
  {
   "ItemCost"            "800"
+  "SecretShop" "1" 
+
  }
 
 
 "item_ward_sentry"      
 {
   "ItemCost"            "5"
- }
+  "ItemStockMax"                    "8"
+  "ItemStockInitial"                "6"
+  "ItemStockTime"                    "30.0"
+}
+
+"item_ward_observer"      
+{
+  "ItemCost"            "50"
+  "ItemStockMax"                    "2"
+  "ItemStockInitial"                "1"
+  "ItemStockTime"                    "100.0"
+}
+
 
 
   //"item_dust"     "REMOVE"
@@ -191,7 +247,6 @@
 
   //"item_force_staff"      "REMOVE"
   //"item_recipe_refresher"     "REMOVE"
-  //"item_refresher"      "REMOVE"
   
   "item_flask"      "REMOVE"
   "item_recipe_aeon_disk"     "REMOVE"
@@ -231,7 +286,6 @@
   "item_ogre_axe"     "REMOVE"
   "item_blade_of_alacrity"      "REMOVE"
   "item_ultimate_orb"     "REMOVE"
-  "item_gloves"     "REMOVE"
   "item_lifesteal"      "REMOVE"
   "item_sobi_mask"      "REMOVE"
   "item_boots"      "REMOVE"
@@ -254,7 +308,6 @@
   "item_eagle"      "REMOVE"
   "item_reaver"     "REMOVE"
   "item_relic"      "REMOVE"
-  "item_hyperstone"     "REMOVE"
   "item_mystic_staff"     "REMOVE"
   "item_energy_booster"     "REMOVE"
   "item_point_booster"      "REMOVE"

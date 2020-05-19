@@ -417,10 +417,10 @@
     "SoundSet"          "0" 
     "Ability1"        "ctf_windwalk"
     "Ability2"        "shredder_chain"
-    "Ability3"        "puck_phase_shift" 
-    "Ability4"        "barebones_empty4"
-    "Ability5"        "puck_ethereal_jaunt"
-    "Ability6"        "puck_illusory_orb"
+    "Ability3"        "puck_illusory_orb" 
+    "Ability4"        "puck_ethereal_jaunt"
+    "Ability5"        "barebones_empty5"
+    "Ability6"        "puck_waning_rift"
 
 
     
@@ -577,7 +577,7 @@
     "Ability3"        "batrider_flamebreak" 
     "Ability4"        "barebones_empty4"
     "Ability5"        "barebones_empty5"
-    "Ability6"        "batrider_firefly"
+    "Ability6"        "dark_seer_vacuum"
 
 
     

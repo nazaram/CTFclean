@@ -1,5 +1,9 @@
 -- Generated from template
 
+require('status_resistance')
+LinkLuaModifier("modifier_status_resistance", "status_resistance.lua", LUA_MODIFIER_MOTION_NONE)
+
+
 if CAddonTemplateGameMode == nil then
 	CAddonTemplateGameMode = class({})
 end
@@ -30,53 +34,53 @@ _G.BadHasFlag = 0
 
 
 _G.GAME_ROUND = 1
-_G.GAME_ROUND1experiencelose = 250
-_G.GAME_ROUND1experiencewin = 300
+_G.GAME_ROUND1experiencelose = 75
+_G.GAME_ROUND1experiencewin = 100
 
-_G.GAME_ROUND2experiencelose = 270
-_G.GAME_ROUND2experiencewin = 330
+_G.GAME_ROUND2experiencelose = 100
+_G.GAME_ROUND2experiencewin =  125
 
-_G.GAME_ROUND3experiencelose = 330
-_G.GAME_ROUND3experiencewin = 370
+_G.GAME_ROUND3experiencelose = 125
+_G.GAME_ROUND3experiencewin = 150
 
-_G.GAME_ROUND4experiencelose = 420
-_G.GAME_ROUND4experiencewin = 450
+_G.GAME_ROUND4experiencelose = 150
+_G.GAME_ROUND4experiencewin = 175
 
-_G.GAME_ROUND5experiencelose = 440
-_G.GAME_ROUND5experiencewin = 480
+_G.GAME_ROUND5experiencelose = 175
+_G.GAME_ROUND5experiencewin = 200
 
-_G.GAME_ROUND6experiencelose = 480
-_G.GAME_ROUND6experiencewin = 530
+_G.GAME_ROUND6experiencelose = 200
+_G.GAME_ROUND6experiencewin = 225
 
-_G.GAME_ROUND7experiencelose = 530
-_G.GAME_ROUND7experiencewin = 560
+_G.GAME_ROUND7experiencelose = 225
+_G.GAME_ROUND7experiencewin = 250
 
-_G.GAME_ROUND8experiencelose = 560
-_G.GAME_ROUND8experiencewin = 590
+_G.GAME_ROUND8experiencelose = 250
+_G.GAME_ROUND8experiencewin = 275
 
-_G.GAME_ROUND9experiencelose = 590
-_G.GAME_ROUND9experiencewin = 630
+_G.GAME_ROUND9experiencelose = 275
+_G.GAME_ROUND9experiencewin = 300
 
-_G.GAME_ROUND10experiencelose = 630
-_G.GAME_ROUND10experiencewin = 660
+_G.GAME_ROUND10experiencelose = 300
+_G.GAME_ROUND10experiencewin = 325
 
-_G.GAME_ROUND11experiencelose = 660
-_G.GAME_ROUND11experiencewin = 700
+_G.GAME_ROUND11experiencelose = 325
+_G.GAME_ROUND11experiencewin = 400
 
-_G.GAME_ROUND12experiencelose = 700
-_G.GAME_ROUND12experiencewin = 730
+_G.GAME_ROUND12experiencelose = 400
+_G.GAME_ROUND12experiencewin = 425
 
-_G.GAME_ROUND13experiencelose = 730
-_G.GAME_ROUND13experiencewin = 750
+_G.GAME_ROUND13experiencelose = 425
+_G.GAME_ROUND13experiencewin = 450
 
-_G.GAME_ROUND14experiencelose = 750
-_G.GAME_ROUND14experiencewin = 790
+_G.GAME_ROUND14experiencelose = 450
+_G.GAME_ROUND14experiencewin = 475
 
-_G.GAME_ROUND15experiencelose = 790
-_G.GAME_ROUND15experiencewin = 820
+_G.GAME_ROUND15experiencelose = 475
+_G.GAME_ROUND15experiencewin = 500
 
-_G.GAME_ROUND16experiencelose = 800
-_G.GAME_ROUND16experiencewin = 900
+_G.GAME_ROUND16experiencelose = 700
+_G.GAME_ROUND16experiencewin = 800
 
 _G.GAME_ROUND17experiencelose = 900
 _G.GAME_ROUND17experiencewin = 1000
@@ -107,6 +111,37 @@ function Precache( context )
 	]]
 end
 
+XP_PER_LEVEL_TABLE = {
+     0, -- 1
+  75,	-- 2
+  175,	-- 3
+  300,	-- 4
+  575,	-- 5
+  675,	-- 6
+  1050,	-- 7
+  2000,	-- 8
+  4200,	-- 9
+  5600,	-- 10
+ 200000,	-- 11
+ 200000,	-- 12
+ 200000,	-- 13
+ 200000,	-- 14
+ 200000,	-- 15
+ 200000,	-- 16
+ 200000,	-- 17
+ 200000,	-- 18
+ 200000,	-- 19
+200000,	-- 20
+200000,	-- 21
+200000,	-- 22
+200000,	-- 23
+200000,	-- 24
+200000 	-- 25
+}
+
+
+_G.startflag = 0
+
 -- Create the game mode when we activate
 function Activate()
 	GameRules.AddonTemplate = CAddonTemplateGameMode()
@@ -120,9 +155,11 @@ function CAddonTemplateGameMode:InitGameMode()
   GameMode:SetPauseEnabled(true)
   GameMode:SetCustomScanCooldown(30) 
   --GameMode:SetUseCustomHeroLevels(true)
-  GameMode:SetCustomHeroMaxLevel(10) 
+  --GameMode:SetCustomHeroMaxLevel(10) 
   --GameMode:SetGoldPerTick(10.0) 
   --GameMode:SetGoldTickTime(1.0)
+  GameMode:SetCustomXPRequiredToReachNextLevel( XP_PER_LEVEL_TABLE )
+  GameMode:SetUseCustomHeroLevels( true )
 
   GameMode:SetTopBarTeamValue(DOTA_TEAM_GOODGUYS, 2)
   GameMode:SetTopBarTeamValue(DOTA_TEAM_BADGUYS, 0)
@@ -131,6 +168,7 @@ function CAddonTemplateGameMode:InitGameMode()
 
   GameMode:SetRecommendedItemsDisabled(true)
 	
+  GameRules:SetPreGameTime( 15.0)
   GameRules:SetTreeRegrowTime(100)
   GameRules:SetStartingGold(400)
   GameRules:SetUseUniversalShopMode(false) 
@@ -138,6 +176,7 @@ function CAddonTemplateGameMode:InitGameMode()
   GameRules:SendCustomMessage("Welcome To Capture The Flag Alpha by buymyhat.com", DOTA_TEAM_NOTEAM, 0)
   GameRules:GetGameModeEntity():SetThink("OnThink", self, "GlobalThink", 2)
   print(" Gamemode rules are set.")
+  GameRules:GetGameModeEntity():SetThink( "XpThink", self, "ExperienceThink", 0.25 )
 
   ListenToGameEvent('npc_spawned', Dynamic_Wrap(CAddonTemplateGameMode, 'OnNPCSpawned'), self)
   ListenToGameEvent('entity_hurt', Dynamic_Wrap(CAddonTemplateGameMode, 'OnEntityHurt'), self)
@@ -153,9 +192,48 @@ function CAddonTemplateGameMode:InitGameMode()
 
 end
 
- function OnHeroPicked (event)
-    local hero = EntIndexToHScript(event.heroindex)
 
+
+
+function CAddonTemplateGameMode:XpThink()
+
+	-- Check if the game is actual over
+	if GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME then
+		return nil
+	else
+		
+		-- Loop for every Player
+		for xpPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
+			teamID = PlayerResource:GetTeam(xpPlayerID)
+			teamXP = 0
+			
+			-- Get the highest XP value in Team of the current player
+			for teamPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
+				if PlayerResource:GetTeam(teamPlayerID) == teamID then
+					if teamXP < PlayerResource:GetTotalEarnedXP(teamPlayerID) then
+						teamXP = PlayerResource:GetTotalEarnedXP(teamPlayerID)
+					end
+				end
+			end			
+			
+			-- Give XP to current Player if needed
+			if PlayerResource:GetSelectedHeroEntity(xpPlayerID) ~= nil then
+				if teamXP > PlayerResource:GetSelectedHeroEntity(xpPlayerID):GetCurrentXP() then
+					PlayerResource:GetSelectedHeroEntity(xpPlayerID):AddExperience(teamXP - PlayerResource:GetSelectedHeroEntity(xpPlayerID):GetCurrentXP(), false)
+				end
+			end
+		end
+		-- Repeater Thinker every 0.25 seconds
+		return 0.25
+	end
+end
+
+
+
+
+ function OnHeroPicked (event)
+    _G.startflag = _G.startflag + 1
+    local hero = EntIndexToHScript(event.heroindex)
     if hero:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
       _G.GoodPlayers = _G.GoodPlayers + 1
     end
@@ -163,7 +241,15 @@ end
     if hero:GetTeamNumber() == DOTA_TEAM_BADGUYS then
       _G.BadPlayers =   _G.BadPlayers + 1
     end
+
+    hero:AddNewModifier(nil, nil, "modifier_stunned", {duration = 5})
     
+    if _G.startflag == 1 then
+      GameRules:SendCustomMessage("<font color='#e5e5e5'> Welcome to Capture the Flag sponsored by </font>" .. "<font color='#ff3232'>buymyhat.com</font>", DOTA_TEAM_NOTEAM, 0)
+    end
+
+
+
     print("Good Players:")
     print(_G.GoodPlayers)
     
@@ -210,15 +296,23 @@ end
 
 
 function reset()
+  
+
   print("reset")
+  EmitGlobalSound("get_ready")
+_G.GoodinPrison = 0
+_G.BadinPrison = 0
+
   _G.GAME_ROUND = _G.GAME_ROUND + 1
+  GameRules:SendCustomMessage("<font color='#a000a0'> Get Ready for Round ".. _G.GAME_ROUND .. "!</font>", DOTA_TEAM_NOTEAM, 0)
  -- local heroes = GetAllRealHeroes()
   for i = 0, (DOTA_MAX_TEAM_PLAYERS-1) do
     player = PlayerResource:GetPlayer(i)
     --print(player)
       if (player ~=nil) then
         hero = player:GetAssignedHero()
-        gold = CONSTANTS.goldForPoint
+        hero:AddNewModifier(nil, nil, "modifier_stunned", {duration = 3})
+        gold = CONSTANTS.goldForPoint + _G.GAME_ROUND * 25
         --GIVE GOLD TO ALL UNITS AT EVERY RESET 
         hero:SetGold(hero:GetGold() + gold, false)
         --print(hero)
@@ -289,7 +383,6 @@ function CAddonTemplateGameMode:OnGameRulesStateChange()
         if nNewState == DOTA_GAMERULES_STATE_PRE_GAME then
                 print( "[CTF] Gamemode is running." )
                 ShowGenericPopup( "#CTF_instructions_title", "#CTF_instructions_body", "", "", DOTA_SHOWGENERICPOPUP_TINT_SCREEN )
-                GameRules:SendCustomMessage("Welcome to " .. COLOR_GREEN .. "Capture The Flag " .. VERSION .. COLOR_NONE .. " by " .. COLOR_RED .. AUTHOR, DOTA_TEAM_NOTEAM, 0)
         end
 end
 
@@ -306,12 +399,10 @@ function CAddonTemplateGameMode:OnEntityHurt(tbl)
   victim:EmitSound("DOTA_Item.Dagon5.Target")
 
 
-
-
   if attacker:IsHero() then
-    attacker:AddExperience(30 + _G.GAME_ROUND * 5, DOTA_ModifyXP_Unspecified, false, false)
+    attacker:AddExperience(15 + _G.GAME_ROUND * 3, DOTA_ModifyXP_Unspecified, false, false)
     --attacker:AddExperience(hero:GetCurrentXP() + 100, DOTA_ModifyXP_Unspecified, false, false)
-    attacker:SetGold(attacker:GetGold() + 25, false)
+    attacker:SetGold(attacker:GetGold() + 50 + _G.GAME_ROUND * 10, false)
   end
 
 
@@ -321,7 +412,7 @@ function CAddonTemplateGameMode:OnEntityHurt(tbl)
       if item then
         if item:GetAbilityName() == "item_capture_bad_flag" or item:GetAbilityName() == "item_capture_good_flag" then
           victim:RemoveItem(item)
-          GameRules:SendCustomMessage("Bad Guys' Flag Has Been Dropped ", DOTA_TEAM_NOTEAM, 0)
+          GameRules:SendCustomMessage("<font color='#ff4c4c'>Bad Guys' Flag Has Been Dropped</font>", DOTA_TEAM_NOTEAM, 0)
           spawnBadFlag()          
         end
       end
@@ -339,7 +430,7 @@ function CAddonTemplateGameMode:OnEntityHurt(tbl)
       if item then
         if item:GetAbilityName() == "item_capture_bad_flag" or item:GetAbilityName() == "item_capture_good_flag" then
           victim:RemoveItem(item)
-          GameRules:SendCustomMessage("Good Guys' Flag Has Been Dropped ", DOTA_TEAM_NOTEAM, 0)
+          GameRules:SendCustomMessage("<font color='#66b266'>Good Guys' Flag Has Been Dropped</font>", DOTA_TEAM_NOTEAM, 0)
           spawnGoodFlag()          
         end
       end
@@ -387,10 +478,12 @@ function updateScore(scoreGood, scoreBad)
   -- If any team reaches scoreToWin, the game ends and that team is considered winner.
   if scoreGood == CONSTANTS.scoreToWin then
     print("Team GOOD GUYS victory!")
+    EmitGlobalSound("Loot_Drop_Stinger_Arcana")
     GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
   end
   if scoreBad == CONSTANTS.scoreToWin then
     print("Team BAD GUYS victory!")
+    EmitGlobalSound("Loot_Drop_Stinger_Arcana")
     GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
   end
 end
@@ -473,7 +566,7 @@ function point(nameHero)
 
 function pointBad()
     print("Bad Team Point!}")
-    GameRules:SendCustomMessage("Bad Guys Scored", DOTA_TEAM_NOTEAM, 0)
+    GameRules:SendCustomMessage("<font color='#ff0000'>Bad Guys Scored </font>", DOTA_TEAM_NOTEAM, 0)
     score.Bad = score.Bad + 1
     updateScore(score.Good, score.Bad)
     EmitGlobalSound("DOTA_Item.ShivasGuard.Activate")
@@ -482,11 +575,19 @@ end
 
 function pointGood()
     print("Good Team Point!}")
-    GameRules:SendCustomMessage("Good Guys Scored", DOTA_TEAM_NOTEAM, 0)
+    GameRules:SendCustomMessage("<font color='#007300'> Good Guys Scored! </font>", DOTA_TEAM_NOTEAM, 0)
     score.Good = score.Good + 1
     updateScore(score.Good, score.Bad)
     EmitGlobalSound("Tutorial.Quest.complete_01")
 end
+
+
+
+
+
+
+
+
 
 
 
