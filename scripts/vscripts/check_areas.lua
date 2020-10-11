@@ -108,7 +108,7 @@ end
 
 
 --FORCE PLAYER TO DROP THEIR OWN FLAG 
-
+--[[
 function leaveGoodAreaBack(trigger)
   local unit = trigger.activator
   if unit:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
@@ -147,10 +147,192 @@ function leavBadAreaBack(trigger)
     end
   end
 end
+--]]
+
+--[[
+function entergoodXPZone(trigger)
+
+local hero = trigger.activator
+if hero:GetTeamNumber() == DOTA_TEAM_GOODGUYS then           
+  
+if _G.GAME_ROUND == 1 then
+  hero:AddExperience(15, DOTA_ModifyXP_Unspecified, false, false)
+end
+if _G.GAME_ROUND == 2 then
+   hero:AddExperience(25, DOTA_ModifyXP_Unspecified, false, false)
+end
+if _G.GAME_ROUND == 3 then
+   hero:AddExperience(35, DOTA_ModifyXP_Unspecified, false, false)
+end
+            
+            if _G.GAME_ROUND == 4 then
+              hero:AddExperience(45, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 5 then
+              hero:AddExperience(75, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 6 then
+              hero:AddExperience(85, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 7 then
+              hero:AddExperience(95, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 8 then
+              hero:AddExperience(100, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 9 then
+              hero:AddExperience(100, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 10 then
+              hero:AddExperience(100, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 11 then
+              hero:AddExperience(120, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 12 then
+              hero:AddExperience(120, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 13 then
+              hero:AddExperience(120, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 14 then
+              hero:AddExperience(150, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 15 then
+              hero:AddExperience(150, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 16 then
+              hero:AddExperience(150, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 17 then
+              hero:AddExperience(200, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 18 then
+              hero:AddExperience(200, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 19 then
+              hero:AddExperience(200, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 20 then
+              hero:AddExperience(200, DOTA_ModifyXP_Unspecified, false, false)
+            end
+  print("enterXP")  
+end
+end
+
+function enterbadXPZone(trigger)
+
+local hero = trigger.activator
+if hero:GetTeamNumber() == DOTA_TEAM_BADGUYS then           
+  
+if _G.GAME_ROUND == 1 then
+  hero:AddExperience(35, DOTA_ModifyXP_Unspecified, false, false)
+end
+if _G.GAME_ROUND == 2 then
+   hero:AddExperience(45, DOTA_ModifyXP_Unspecified, false, false)
+end
+if _G.GAME_ROUND == 3 then
+   hero:AddExperience(55, DOTA_ModifyXP_Unspecified, false, false)
+end
+            
+            if _G.GAME_ROUND == 4 then
+              hero:AddExperience(65, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 5 then
+              hero:AddExperience(75, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 6 then
+              hero:AddExperience(85, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 7 then
+              hero:AddExperience(95, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 8 then
+              hero:AddExperience(100, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 9 then
+              hero:AddExperience(100, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 10 then
+              hero:AddExperience(100, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 11 then
+              hero:AddExperience(120, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 12 then
+              hero:AddExperience(120, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 13 then
+              hero:AddExperience(120, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 14 then
+              hero:AddExperience(150, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 15 then
+              hero:AddExperience(150, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 16 then
+              hero:AddExperience(150, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 17 then
+              hero:AddExperience(200, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 18 then
+              hero:AddExperience(200, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 19 then
+              hero:AddExperience(200, DOTA_ModifyXP_Unspecified, false, false)
+            end
+            if _G.GAME_ROUND == 20 then
+              hero:AddExperience(200, DOTA_ModifyXP_Unspecified, false, false)
+            end
+  print("enterXP")  
+end
+end
+
+--]]
 
 
+--anti-camp
+
+function enterantiGoodCamp(trigger)
+local unit = trigger.activator
+  if unit:GetTeamNumber() == DOTA_TEAM_BADGUYS then
+    unit:RemoveModifierByName("modifier_attack_immune")
+    unit:RemoveModifierByName("modifier_custom")           
+    unit:RemoveModifierByName('modifier_status_resistance')
+  end
+end
+
+function leaveantiGoodCamp(trigger)
+local unit = trigger.activator
+  if unit:GetTeamNumber() == DOTA_TEAM_BADGUYS then
+    unit:AddNewModifier(unit, nil, "modifier_attack_immune", {})
+    local ModMaster = CreateItem("item_modifier_master", nil, nil) 
+    ModMaster:ApplyDataDrivenModifier(unit, unit, "modifier_custom", nil)
+    unit:AddNewModifier(unit, unit, "modifier_status_resistance", nil)
+	end
+end
 
 
+function enterantiBadCamp(trigger)
+local unit = trigger.activator
+  if unit:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
+    unit:RemoveModifierByName("modifier_attack_immune")
+    unit:RemoveModifierByName("modifier_custom")           
+    unit:RemoveModifierByName('modifier_status_resistance')
+  end
+end
+
+function leaveantiBadCamp(trigger)
+local unit = trigger.activator
+  if unit:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
+    unit:AddNewModifier(unit, nil, "modifier_attack_immune", {})
+    local ModMaster = CreateItem("item_modifier_master", nil, nil) 
+    ModMaster:ApplyDataDrivenModifier(unit, unit, "modifier_custom", nil)
+    unit:AddNewModifier(unit, unit, "modifier_status_resistance", nil)
+	end
+end
 
 
 
@@ -177,7 +359,7 @@ function enterGoodAreaBack(trigger)
           unit:IncrementDenies()
           reset()
           rewardGoodWin()
-          unit:SetGold(unit:GetGold() + 100, false)        
+          unit:SetGold(unit:GetGold() + 100 + _G.GAME_ROUND * 10, false)        
         end
       end
     end    
@@ -205,7 +387,7 @@ function enterBadAreaBack(trigger)
           unit:IncrementDenies()
           spawnGoodFlag()
           reset()
-          unit:SetGold(unit:GetGold() + 100, false)
+          unit:SetGold(unit:GetGold() + 100 + _G.GAME_ROUND * 10 , false)
           rewardBadWin()
         end
       end

@@ -333,6 +333,7 @@
 
 
   "ctf_windwalk"                       //Code which is called when the ability is referenced
+  
   {
     //General
     "BaseClass"           "clinkz_wind_walk"                        //The ability this is based on 
@@ -366,6 +367,7 @@
       }
       
     }
+  
    }
 
 
@@ -420,17 +422,17 @@
       "04"
       { 
         "var_type"      "FIELD_INTEGER"
-        "attacks_to_destroy"  "1"
+        "attacks_to_destroy"  "3"
       }
       "05"
       { 
         "var_type"      "FIELD_INTEGER"
-        "push_length"   "-1300"
+        "push_length"   "-600"
       }
       "06"
       { 
         "var_type"      "FIELD_FLOAT"
-        "push_duration"   "3"
+        "push_duration"   "4"
       }
       "07"
       { 
@@ -588,27 +590,24 @@
 
 
 
-"pudge_meat_hook"
+  "pudge_meat_hook"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
-    "ID"          "5075"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "AbilityUnitDamageType"     "DAMAGE_TYPE_PURE"  
     "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_YES"
-    "FightRecapLevel"       "1"
-        "MaxLevel"                      "3"
-    "HasScepterUpgrade"         "1"
+    "MaxLevel"                      "3"
     "AbilitySound"          "Hero_Pudge.AttackHookExtend"
+    "AbilityCastRange"        "950 1200 1400"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"        "700 900 1400"
-    "AbilityCastPoint"        "0.3 0.3 0.3"
+    "AbilityCastPoint"        "0.3 0.3 0.3 0.3"
 
     // Time   
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"       "27 22 17"
+    "AbilityCooldown"       "15 13 11"
 
     // Damage.
     //-------------------------------------------------------------------------------------------------------------
@@ -624,42 +623,40 @@
     {
       "01"
       {
-        "var_type"        "FIELD_FLOAT"
-        "hook_speed"      "1450.0"
+        "var_type"        "FIELD_INTEGER"
+        "damage"      "0"
+        "LinkedSpecialBonus"      "special_bonus_unique_pudge_7"
       }
       "02"
       {
-        "var_type"      "FIELD_INTEGER"
-        "hook_width"    "150"
+        "var_type"        "FIELD_FLOAT"
+        "hook_speed"      "1450.0"
       }
       "03"
       {
         "var_type"      "FIELD_INTEGER"
-        "hook_distance"   "700 900 1400"
+        "hook_width"    "100"
       }
       "04"
       {
         "var_type"      "FIELD_INTEGER"
-        "vision_radius"   "500 500 500"
+        "hook_distance"   "950 1200 1400"
       }
       "05"
       {
-        "var_type"      "FIELD_FLOAT"
-        "vision_duration" "6.0 10.0 14.0"
+        "var_type"      "FIELD_INTEGER"
+        "vision_radius"   "500"
       }
       "06"
       {
-        "var_type"        "FIELD_FLOAT"
-        "cooldown_scepter"    "4.0"
-      }
-      "07"
-      {
-        "var_type"        "FIELD_INTEGER"
-        "damage_scepter"    "180 270 360 450 540 630 720"
+        "var_type"      "FIELD_FLOAT"
+        "vision_duration" "4.0 4.0 4.0"
       }
     }
     "AbilityCastAnimation"    "ACT_DOTA_CAST_ABILITY_1"
   }
+  
+
   
  
   //=================================================================================================================
@@ -680,12 +677,12 @@
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"        "0.3 0.3 0.3"
+    "AbilityCastPoint"        "0.6"
     "AbilityCastRange"        "0"
     
     // Time   
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"       "18.0 14.0 10.0"
+    "AbilityCooldown"       "9.0 8.0 6.5"
     
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -701,7 +698,7 @@
       "01"
       {
         "var_type"      "FIELD_INTEGER"
-        "radius"      "350 425 675"
+        "radius"      "150 250 475"
       }
       "02"
       { 
@@ -711,12 +708,12 @@
       "03"
       { 
         "var_type"      "FIELD_INTEGER"
-        "speed"       "400 500 600"
+        "speed"       "200 300 400"
       }
       "04"
       { 
         "var_type"      "FIELD_INTEGER"
-        "vision_radius"   "400 700 900"
+        "vision_radius"   "700 800 900"
       }
       "05"
       {
@@ -746,7 +743,7 @@
 
     // Time   
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"       "12 9 6"
+    "AbilityCooldown"       "10 8 5"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -760,7 +757,7 @@
       "02"
       {
         "var_type"        "FIELD_INTEGER"
-        "gold_steal"      "200 300 400"
+        "gold_steal"      "150 250 350"
         "LinkedSpecialBonus"    "special_bonus_unique_bounty_hunter"
       }
     }
@@ -795,7 +792,7 @@
     "AbilityCastPoint"        "0.8"
     "AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_4"
 
-    "AbilityCooldown"       "6"
+    "AbilityCooldown"       "2"
     "AbilityManaCost"       "50"
       
     // Special
@@ -815,19 +812,19 @@
       "03"
       {
         "var_type"        "FIELD_INTEGER"
-        "bonus_gold_self"   "150"
+        "bonus_gold_self"   "200"
         "LinkedSpecialBonus"  "special_bonus_unique_bounty_hunter_3"
       }
       "04"
       {
         "var_type"        "FIELD_INTEGER"
-        "bonus_gold"      "200"
+        "bonus_gold"      "100"
         "LinkedSpecialBonus"  "special_bonus_unique_bounty_hunter_3"
       }
       "05"
       {
         "var_type"        "FIELD_FLOAT"
-        "duration"        "7"
+        "duration"        "9"
       }
       "06"
       {
@@ -873,7 +870,7 @@
     // Time   
     //-------------------------------------------------------------------------------------------------------------
     "AbilityChannelTime"      "6"
-    "AbilityCooldown"       "30"
+    "AbilityCooldown"       "13"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -929,11 +926,11 @@
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"        "1.0"
+    "AbilityCastPoint"        "0.4"
     
     // Time   
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"       "12 9 7"
+    "AbilityCooldown"       "15 10 8"
     
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -1006,7 +1003,7 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"       "17.0"
+    "AbilityCooldown"       "12.0"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -1105,7 +1102,7 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "25"
+    "AbilityCooldown"                                     "13"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -1118,7 +1115,7 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "activation_radius"                               "200"
+        "activation_radius"                               "150"
       }
       "02"
       {
@@ -1128,7 +1125,7 @@
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "stun_radius"                                     "200"
+        "stun_radius"                                     "150"
       }
       "04"
       {
@@ -1148,7 +1145,7 @@
       "07"
       {
         "var_type"          "FIELD_FLOAT"
-        "duration"          "100.0"
+        "duration"          "29.0"
       }
     }
   }
@@ -1164,7 +1161,7 @@
   {
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
      "AbilityUnitTargetTeam"       "DOTA_UNIT_TARGET_TEAM_BOTH"
-     "AbilityManaCost"                                     "300"
+     "AbilityManaCost"                                     "100"
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -1173,7 +1170,7 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"       "16 14 12"
+    "AbilityCooldown"       "12 10 8"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -1182,17 +1179,17 @@
       "08"
       {
         "var_type"        "FIELD_INTEGER"
-        "impact_radius"     "400"
+        "impact_radius"     "300"
       }
       "09"
       {
         "var_type"        "FIELD_INTEGER"
-        "impact_damage"     "0 0 50"
+        "impact_damage"     "0 0 0"
       }
       "10"
       {
         "var_type"        "FIELD_FLOAT"
-        "impact_stun_duration"  "0.5 0.8 1.0"
+        "impact_stun_duration"  "1.0 1.5 2.0"
       }
       "11"
       {
@@ -1237,7 +1234,7 @@
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "15"
+    "AbilityCooldown"                                     "14"
     "AbilityCastPoint"                                    "0"
 
     // Cost
@@ -1256,7 +1253,7 @@
       "02"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "stun_duration"                                   "0.5"
+        "stun_duration"                                   "1"
       }
       "03"
       {
@@ -1296,7 +1293,7 @@
     //-------------------------------------------------------------------------------------------------------------
     "ID"                                                  "5353"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_ALERT_TARGET | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
-    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_BOTH"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
 
@@ -1313,7 +1310,7 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "22"
+    "AbilityCooldown"                                     "15 12 10"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -1330,13 +1327,13 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "movement_speed"                                  "-40 -20 -5"
+        "movement_speed"                                  "-5 -2 0"
         "LinkedSpecialBonus"                              "special_bonus_unique_spirit_breaker_2"
       }
       "02"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "stun_duration"                                   "0.1 0.1 0.2"
+        "stun_duration"                                   "0.5"
       }
       "03"
       {
@@ -1379,7 +1376,7 @@
     
     // Time   
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"       "30 25 20"
+    "AbilityCooldown"       "14 12 10"
 
   
     // Cost
@@ -1431,6 +1428,81 @@
   }
   
 
+  "kunkka_torrent_jail"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "ID"          "5031"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+    "BaseClass"           "kunkka_torrent"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+    "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL" 
+    "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_YES"
+    "SpellDispellableType"      "SPELL_DISPELLABLE_YES"
+    "FightRecapLevel"         "1"
+    "MaxLevel"                      "1"
+    "level"                          "1"
+    "AbilitySound"          "Ability.Torrent"
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"        "15000"
+    "AbilityCastPoint"        "0.4"
+    
+    // Time   
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"       "9"
+
+  
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "200"
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityModifierSupportValue" "0.5" // applies 2 modifiers
+    
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"          "FIELD_INTEGER"
+        "radius"          "175"
+        "LinkedSpecialBonus"    "special_bonus_unique_kunkka"
+      }
+      "02"
+      {
+        "var_type"          "FIELD_INTEGER"
+        "movespeed_bonus"     "-15"
+      }
+      "03"
+      {
+        "var_type"          "FIELD_FLOAT"
+        "slow_duration"       "5"
+      }
+      "04"
+      {
+        "var_type"          "FIELD_FLOAT"
+        "stun_duration"       "3.5"
+      }
+      "05"
+      {
+        "var_type"          "FIELD_FLOAT"
+        "delay"           "1.5"
+      }
+      "06"
+      {
+        "var_type"          "FIELD_INTEGER"
+        "torrent_damage"      "0"
+      }
+    }   
+    "AbilityCastAnimation"    "ACT_DOTA_CAST_ABILITY_1"
+  }
+
+
+
+
   //=================================================================================================================
   // Kunkka: X Marks the Spot
   //=================================================================================================================
@@ -1452,12 +1524,12 @@
     
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"        "600"
+    "AbilityCastRange"        "800"
     "AbilityCastPoint"        "0.4"
     
     // Time   
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"       "30"
+    "AbilityCooldown"       "12"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -1664,7 +1736,7 @@
 
     // Time   
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"       "6"
+    "AbilityCooldown"       "3"
     "AbilityCastRange"        "270"
     "AbilityCastPoint"        "0.0"
 
@@ -1718,12 +1790,12 @@
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"        "0.3"
-    "AbilityCastRange"        "900" "1500" "2000"
+    "AbilityCastPoint"        "0.1"
+    "AbilityCastRange"        "1200" "1500" "2500"
     
     // Time   
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"       "12" "9" "7"
+    "AbilityCooldown"       "6" "5" "4"
     
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -1741,7 +1813,7 @@
       "02"
       {
         "var_type"      "FIELD_INTEGER"
-        "range"       "1000" "1500" "2000"
+        "range"       "1200" "1500" "2500"
       }
       "03"
       {
@@ -1751,13 +1823,23 @@
       "04"
       { 
         "var_type"      "FIELD_INTEGER"
-        "speed"       "1000"
+        "speed"       "1100"
       }
       "05"
       { 
         "var_type"      "FIELD_INTEGER"
         "damage"      "0"
       }
+     "06"
+      {
+        "var_type"            "FIELD_INTEGER"
+        "max_charges"         "4"
+      }   
+      "07"
+      {
+        "var_type"            "FIELD_FLOAT"
+        "charge_restore_time"     "5"
+      }         
     }
   }
 
@@ -1847,7 +1929,7 @@
 
     // Time   
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"       "16.0 14.0 12.0"
+    "AbilityCooldown"       "12.0 10.0 8.0"
 
 
     // Cost
@@ -1882,7 +1964,7 @@
       "05"
       {
         "var_type"          "FIELD_FLOAT"
-        "shard_duration"        "4"
+        "shard_duration"        "4 5 6"
       }
       "06"
       {
@@ -1892,7 +1974,7 @@
       "07"
       {
         "var_type"          "FIELD_INTEGER"
-        "shard_distance"      "300"
+        "shard_distance"      "300 400 500"
       }
     }
     "AbilityCastAnimation"    "ACT_DOTA_CAST_ABILITY_1"
@@ -1940,7 +2022,7 @@
 
     // Time   
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"       "26 21 16"
+    "AbilityCooldown"       "11 9 7"
 
 
     // Cost
@@ -1971,7 +2053,7 @@
       "04"
       {
         "var_type"          "FIELD_FLOAT"
-        "stun_duration"       "0.1 0.2 0.3"
+        "stun_duration"       "1"
       }
       "05"
       {
@@ -2001,7 +2083,7 @@
       "10"
       {
         "var_type"          "FIELD_INTEGER"
-        "snowball_grab_radius"    "550"
+        "snowball_grab_radius"    "2050"
       }
     }
     "AbilityCastAnimation"    "ACT_DOTA_CAST_ABILITY_2"
@@ -2043,11 +2125,11 @@
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"        "600 700 800"
+    "AbilityCastRange"        "800 900 1100"
 
     // Time   
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"       "15 13 11"
+    "AbilityCooldown"       "13 11 9"
   
     // Damage.
     //-------------------------------------------------------------------------------------------------------------
@@ -2076,7 +2158,7 @@
       "03"
       {
         "var_type"          "FIELD_INTEGER"
-        "orb_speed"         "340"
+        "orb_speed"         "420"
         "LinkedSpecialBonus"    "special_bonus_unique_puck"
         "LinkedSpecialBonusOperation" "SPECIAL_BONUS_PERCENTAGE_ADD"
       }
@@ -2133,7 +2215,7 @@
 
     // Time   
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"       "9"
+    "AbilityCooldown"       "10 9 8"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -2174,8 +2256,8 @@
 
     // Time   
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"       "15 13 11"
-    "AbilityDuration"       "5"
+    "AbilityCooldown"       "9 7 5"
+    "AbilityDuration"       "3"
 
     // Damage.
     //-------------------------------------------------------------------------------------------------------------
@@ -2192,12 +2274,12 @@
       "01"
       {
         "var_type"      "FIELD_FLOAT"
-        "wave_speed"    "2000.0"
+        "wave_speed"    "2000.0 3000.0 4000.0"
       }
       "02"
       {
         "var_type"      "FIELD_INTEGER"
-        "wave_width"    "1000"
+        "wave_width"    "200 300 400"
       }
       "03"
       {
@@ -2208,12 +2290,12 @@
       "04"
       {
         "var_type"      "FIELD_FLOAT"
-        "vision_aoe"    "1500"
+        "vision_aoe"    "500 600 700"
       }
       "05"
       {
         "var_type"      "FIELD_FLOAT"
-        "vision_duration" "8"
+        "vision_duration" "6 7 8"
       }
       
     }
@@ -2263,12 +2345,12 @@
       "01"
       {
         "var_type"            "FIELD_INTEGER"
-        "max_charges"         "3"
+        "max_charges"         "4"
       }   
       "02"
       {
         "var_type"            "FIELD_FLOAT"
-        "charge_restore_time"     "45"
+        "charge_restore_time"     "8"
       }   
       "03"
       {
@@ -2337,7 +2419,7 @@
       "09"
       {
         "var_type"        "FIELD_FLOAT"
-        "knockback_distance"  "500"
+        "knockback_distance"  "900"
       }
 
       "11"
@@ -2377,7 +2459,7 @@
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "22" 
+    "AbilityCooldown"                                     "14" 
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -2389,7 +2471,7 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "radius"                                          "550"
+        "radius"                                          "500"
         "LinkedSpecialBonus"                              "special_bonus_unique_dark_seer_2"
       }
       "02"
@@ -2442,7 +2524,7 @@
         
         // Time     
         //-------------------------------------------------------------------------------------------------------------
-        "AbilityCooldown"               "16 14 12"
+        "AbilityCooldown"               "11 9 6"
 
         // Damage.
         //-------------------------------------------------------------------------------------------------------------
@@ -2464,13 +2546,13 @@
             "02"
             {
                 "var_type"              "FIELD_FLOAT"
-                "stun_duration"         "1.5 2.0 3.5"
+                "stun_duration"         "1.5 2.1 3.1"
                 "LinkedSpecialBonus"    "special_bonus_unique_windranger_6"
             }
             "03"
             {
                 "var_type"              "FIELD_INTEGER"
-                "shackle_distance"      "375"
+                "shackle_distance"      "475"
             }
             "05"
             {
@@ -2507,7 +2589,7 @@
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"        "2600"
-    "AbilityCastPoint"        "1.9"
+    "AbilityCastPoint"        "1.5"
     
     // Time   
     //-------------------------------------------------------------------------------------------------------------
@@ -2583,7 +2665,7 @@
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"        "1800"
-    "AbilityCastPoint"        "1.5"
+    "AbilityCastPoint"        "1"
 
     // Time   
     //-------------------------------------------------------------------------------------------------------------
@@ -2625,7 +2707,7 @@
       "05"
       {
         "var_type"      "FIELD_FLOAT"
-        "arrow_min_stun"  "0.01"
+        "arrow_min_stun"  "3"
       }
       "06"
       {
@@ -2666,7 +2748,7 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"       "100"
+    "AbilityManaCost"       "5"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -2706,17 +2788,96 @@
       "07"
       {
         "var_type"        "FIELD_INTEGER"
-        "max_charges"     "3"
+        "max_charges"     "4"
       }
       "08"
       {
         "var_type"        "FIELD_INTEGER"
-        "charge_restore_time" "10"
+        "charge_restore_time" "5"
       }
     }
     "AbilityCastAnimation"    "ACT_DOTA_CAST_ABILITY_3"
   }
   
+
+//=================================================================================================================
+  // Ability: Mirana Leap
+  //=================================================================================================================
+  "mirana_leap_two"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+      "BaseClass"           "mirana_leap"
+    "ID"          "5050"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
+    "SpellDispellableType"      "SPELL_DISPELLABLE_YES"
+    "AbilitySound"          "Ability.Leap"
+    "MaxLevel"                      "1"
+    "AbilityType"         "DOTA_ABILITY_TYPE_ULTIMATE"
+    
+    // Time   
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"       "16"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "100"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "leap_distance"     "800"
+      }
+      "02"
+      {
+        "var_type"        "FIELD_FLOAT"
+        "leap_speed"      "600.0"
+      }
+      "03"
+      {
+        "var_type"        "FIELD_FLOAT"
+        "leap_acceleration"   "-300.0"
+      }
+      "04"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "leap_speedbonus" "1"
+      }
+      "05"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "leap_speedbonus_as"  "10"
+        "LinkedSpecialBonus"  "special_bonus_unique_mirana_1"
+      }
+      "06"
+      {
+        "var_type"        "FIELD_FLOAT"
+        "leap_bonus_duration" "2.5"
+      }
+      "07"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "max_charges"     "2"
+      }
+      "08"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "charge_restore_time" "11"
+      }
+    }
+    "AbilityCastAnimation"    "ACT_DOTA_CAST_ABILITY_3"
+  }
+
+
+
+
+
+
+
 //=================================================================================================================
   // Ability: Earthshaker Fissure
   //=================================================================================================================
@@ -2737,12 +2898,12 @@
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"        "1400"
-    "AbilityCastPoint"        "0.69 0.69 0.69"
+    "AbilityCastRange"        "850"
+    "AbilityCastPoint"        "0.1"
 
     // Time   
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"       "21 19 17"
+    "AbilityCooldown"       "3.5"
 
     // Damage.
     //-------------------------------------------------------------------------------------------------------------
@@ -2750,7 +2911,7 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"       "100"   
+    "AbilityManaCost"       "10"   
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -2759,23 +2920,23 @@
       "01"
       {
         "var_type"          "FIELD_INTEGER"
-        "fissure_range"       "2400"
+        "fissure_range"       "850"
         "LinkedSpecialBonus"    "special_bonus_unique_earthshaker_3"
       }
       "02"
       {
         "var_type"          "FIELD_FLOAT"
-        "fissure_duration"      "8.0"
+        "fissure_duration"      "10 14 16"
       }
       "03"
       {
         "var_type"          "FIELD_INTEGER"
-        "fissure_radius"        "225"
+        "fissure_radius"        "250"
       }
       "04"
       {
         "var_type"          "FIELD_FLOAT"
-        "stun_duration"       "1"
+        "stun_duration"       ".1"
       }
     }
     "AbilityCastAnimation"    "ACT_DOTA_CAST_ABILITY_1"
@@ -2808,7 +2969,7 @@
 
     // Time   
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"       "32.0"
+    "AbilityCooldown"       "20.0"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -2830,7 +2991,7 @@
       "02"
       {
         "var_type"          "FIELD_INTEGER"
-        "cast_range"        "700"
+        "cast_range"        "800"
       }
     }
     "AbilityCastAnimation"    "ACT_DOTA_CAST_ABILITY_2"
@@ -2859,7 +3020,7 @@
 
     // Time   
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"       "19 16 13"
+    "AbilityCooldown"       "14 9 8"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -2867,7 +3028,7 @@
     
     // Cast Range
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"        "500"
+    "AbilityCastRange"        "600"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -2876,17 +3037,17 @@
       "01"
       {
         "var_type"          "FIELD_INTEGER"
-        "radius"          "420 480 560"
+        "radius"          "550"
       }
       "02"
       {
         "var_type"          "FIELD_FLOAT"
-        "formation_time"      "0.9 0.6 0.5"
+        "formation_time"      "0.9 0.6 0.3"
       }
       "03"
       {
         "var_type"          "FIELD_FLOAT"
-        "duration"          "2.6 2.9 3.1"
+        "duration"          "2 3 4"
         "LinkedSpecialBonus"    "special_bonus_unique_disruptor_5"
       }
     }
@@ -2896,8 +3057,8 @@
 {
   "MaxLevel"                                      "1"
   "AbilityType"         "DOTA_ABILITY_TYPE_ULTIMATE"
-  "AbilityCooldown"       "22.0"
-  "AbilityCastRange"        "100"
+  "AbilityCooldown"       "9.0"
+  "AbilityCastRange"        "300"
 
 
     "AbilitySpecial"
@@ -2905,7 +3066,7 @@
         "02"
         {
             "var_type"        "FIELD_FLOAT"
-            "silence_duration"    "5.5"
+            "silence_duration"    "2.5"
         }
         "03"
         {
@@ -2915,6 +3076,784 @@
         }
     }
 }
+
+"magnataur_skewer"
+{
+  // General
+  //-------------------------------------------------------------------------------------------------------------
+  "BaseClass"           "magnataur_skewer"
+  "AbilityTextureName"      "magnataur_skewer"
+  "MaxLevel"                                      "1"
+  "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
+  "AbilityType"         "DOTA_ABILITY_TYPE_ULTIMATE"
+  
+  // Casting
+  //-------------------------------------------------------------------------------------------------------------
+
+  //-------------------------------------------------------------------------------------------------------------
+  "AbilityCooldown"       "25.0"
+
+  // Cost
+  //-------------------------------------------------------------------------------------------------------------
+  "AbilityManaCost"       "80"
+
+  // Special
+  //-------------------------------------------------------------------------------------------------------------
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "skewer_speed"          "550"
+    }
+
+    "06"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "skewer_damage"     "0"
+    }
+    "07"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "range"         "3500"
+    }
+
+
+  }
+}
+
+
+
+"holdout_friendly_skewer"
+{
+  // General
+  //-------------------------------------------------------------------------------------------------------------
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT"
+  "AbilityTextureName"      "magnataur_skewer"
+  "MaxLevel"                                      "3"
+
+  // Casting
+  //-------------------------------------------------------------------------------------------------------------
+  "AbilityCastPoint"        "0.3"
+
+  // Time   
+  //-------------------------------------------------------------------------------------------------------------
+  "AbilityCooldown"       "16 12 9"
+
+  // Cost
+  //-------------------------------------------------------------------------------------------------------------
+  "AbilityManaCost"       "20"
+
+  // Special
+  //-------------------------------------------------------------------------------------------------------------
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "skewer_speed"          "600" "700" "800"
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "skewer_radius"       "155"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "max_targets"     "5"
+    }
+    "04"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "slow_duration"       "15"
+    }
+    "05"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "slow_pct"        "5"
+    }
+    "06"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "skewer_damage"     "0"
+    }
+    "07"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "range"         "1100" "1250" "1400"
+    }
+    "08"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "tree_radius"       "0"
+    }
+    "09"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "affects_creeps"    "1"
+    }
+  }
+}
+
+
+
+  "wisp_tether"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "ID"                                                  "5485"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_BOTH"
+    "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_CUSTOM"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+    "MaxLevel"                                            "3"
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"                                    "0.001"
+
+    // Time
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"                                     "16 14 12"
+    "AbilityDuration"                                     "10 12 14"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"                                     "40"
+
+    // Cast Range
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"                                    "900 1300 1700"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "radius"                                          "900"
+      }
+      "02"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "movespeed"                                       "1 5 8"
+      }
+      "03"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "latch_distance"                                  "700"
+      }
+      "04"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "latch_speed"                                     "1000"
+      }
+      "05"
+      {
+        "var_type"                                        "FIELD_FLOAT"
+        "tether_duration"                                 "10 12 14"
+      }
+      "06"
+      {
+        "var_type"                                        "FIELD_FLOAT"
+        "tether_heal_amp"                                 "0"
+      }
+      "07"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "slow"                                            "-30"
+      }
+      "08"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "attackslow_tooltip"                              "-30"
+      }
+      "09"
+      {
+        "var_type"                                        "FIELD_FLOAT"
+        "stun_duration"                                   "1"
+      }
+    }
+  }
+
+
+  "wisp_tether_break"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "ID"                                                  "5489"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "MaxLevel"                                            "1"
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"                                    "0 0 0 0 0 0"
+
+    // Time    
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"                                     "1.0 1.0 1.0 1.0 1.0 1.0"
+  }
+
+
+  "wisp_spirits"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "ID"                                                  "5486"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+    "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
+    "MaxLevel"                                            "1"
+    "AbilityType"                                    "DOTA_ABILITY_TYPE_ULTIMATE"
+
+
+    // Time
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"                                     "16.0"
+    "AbilityDuration"                                     "3.1"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"                                     "100"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+
+      "03"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "hero_damage"                                     "25"
+      }
+      "11"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "spirit_movement_rate"                            "150"
+      }
+    
+     "08"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "explode_radius"                                  "5"
+      }
+
+    }
+  }
+
+
+  "Armour_Up"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"           "ability_datadriven"
+    "ID"              "2187"  //Valve's version of this item uses the ID "187".
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_BOTH"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL"
+    "AbilityUnitTargetFlags"    "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+    "Model"             "models/props_gameplay/red_box.vmdl" 
+    "AbilityTextureName"      "omniknight_repel"
+    "MaxLevel" "3"
+
+    "AbilityManaCost" "0"
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"        "%range"
+    "AbilityCastPoint"        "0.0"
+    "AbilityCooldown"       "12.0 9.0 7.5"
+
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "armor_buff"      "999999"
+      }
+      "02"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "evasion"       "30"
+      }
+      "03"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "armor_debuff"      "-1"
+      }
+      "04"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "miss_chance"     "30"
+      }
+      "05"
+      {
+        "var_type"        "FIELD_FLOAT"
+        "duration"        "2.2 2.4 2.8"
+      }
+      "06"
+      {
+        "var_type"        "FIELD_FLOAT"
+        "range"         "1300 1600 2000"
+      } 
+    }
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"    "solar_crest_hvh.lua"
+        "Function"      "item_solar_crest_hvh_on_spell_start"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_item_solar_crest_hvh_caster_debuff"  //Placed onto the caster.
+      {
+        "Duration"      "%duration"
+        "Passive"     "0"
+        "IsHidden"      "0"
+        "IsBuff"      "0"
+        "IsDebuff"      "1"
+        "IsPurgable"    "1"
+
+        "EffectName"      "particles/items2_fx/medallion_of_courage.vpcf"
+        "EffectAttachType"    "follow_overhead"
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"    "%armor_debuff"
+        }
+      }     
+      "modifier_item_solar_crest_hvh_debuff"  //Placed onto enemies.
+      {
+        "Duration"      "%duration"
+        "Passive"     "0"
+        "IsHidden"      "1"
+        "IsBuff"      "0"
+        "IsDebuff"      "1"
+        "IsPurgable"    "1"
+
+        "EffectName"      "particles/items2_fx/medallion_of_courage.vpcf"
+        "EffectAttachType"    "follow_overhead"
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"    "%armor_debuff"
+          "MODIFIER_PROPERTY_MISS_PERCENTAGE"       "%miss_chance"
+        }
+      }
+      "modifier_item_solar_crest_hvh_buff"  //Placed onto allies.
+      {
+        "Duration"      "%duration"
+        "Passive"     "0"
+        "IsHidden"      "0"
+        "IsBuff"      "1"
+        "IsDebuff"      "0"
+        "IsPurgable"    "1"
+
+        "EffectName"      "particles/items2_fx/medallion_of_courage.vpcf"
+        "EffectAttachType"    "follow_overhead"
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"    "%armor_buff"
+          "MODIFIER_PROPERTY_EVASION_CONSTANT"      "%evasion"
+        }
+      }
+    }
+  }
+
+
+
+"torrent_datadriven"
+{
+  // General
+  //-------------------------------------------------------------------------------------------------------------
+  "BaseClass"       "ability_datadriven"
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+  "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL" 
+  "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_NO"
+  "FightRecapLevel"       "1"
+  "AbilityTextureName"      "kunkka_torrent"
+  "MaxLevel"                "1"
+  "AOERadius"           "%radius"
+  
+  
+  // Casting
+  //-------------------------------------------------------------------------------------------------------------
+  "AbilityCastRange"        "8000"
+  "AbilityCastPoint"        "0.4"
+  
+  // Time   
+  //-------------------------------------------------------------------------------------------------------------
+  "AbilityCooldown"       "20.0"
+
+  // Damage.
+  //-------------------------------------------------------------------------------------------------------------
+  "AbilityDamage"         "0"
+
+  // Cost
+  //-------------------------------------------------------------------------------------------------------------
+  "AbilityManaCost"       "50"
+
+  // Stats
+  //-------------------------------------------------------------------------------------------------------------
+  "AbilityModifierSupportValue" "0.5" // applies 2 modifiers
+  
+  // Special
+  //-------------------------------------------------------------------------------------------------------------
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"          "FIELD_INTEGER"
+      "radius"          "160"
+    }
+    "02"
+    {
+      "var_type"          "FIELD_INTEGER"
+      "movespeed_bonus"     "-35"
+    }
+    "03"
+    {
+      "var_type"          "FIELD_FLOAT"
+      "slow_duration"       "1.0"
+    }
+    "04"
+    {
+      "var_type"          "FIELD_FLOAT"
+      "stun_duration"       "1.53"
+    }
+    "05"
+    {
+      "var_type"          "FIELD_FLOAT"
+      "delay"           "2.6"
+    }
+    // Extra variables
+    "06"
+    {
+      "var_type"          "FIELD_INTEGER"
+      "tick_count"        "10"
+    }
+    "07"
+    {
+      "var_type"          "FIELD_FLOAT"
+      "vision_duration"     "4.73"        // delay time + 3.13 sec vision time
+    }
+    "08"
+    {
+      "var_type"          "FIELD_INTEGER"
+      "torrent_height"      "400"
+    }
+  }
+
+  // Data driven
+  //------------------------------------------------------------------------------------------------------------- 
+  "precache"
+  {
+    "soundfile"           "soundevents/game_sounds_heroes/game_sounds_kunkka.vsndevts"
+    "particle"            "particles/units/heroes/hero_kunkka/kunkka_spell_torrent_bubbles.vpcf"
+    "particle"            "particles/units/heroes/hero_kunkka/kunkka_spell_torrent_splash.vpcf"
+  }
+  
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+      "ScriptFile"        "torrent.lua"
+      "Function"          "torrent_bubble_allies"
+      "Target"          "POINT"
+    }
+
+    "RunScript"
+    {
+      "ScriptFile"        "torrent.lua"
+      "Function"          "torrent_vision"
+      "Target"          "POINT"
+    }
+    
+    "DelayedAction"
+    {
+      "Delay"           "%delay"
+      "Action"
+      {
+        "RunScript"
+        {
+          "ScriptFile"      "torrent.lua"
+          "Function"        "torrent_emit_sound"
+          "Target"        "POINT"
+        }
+      
+        "FireEffect"
+        {
+          "Target"        "CASTER"
+          "EffectName"      "particles/units/heroes/hero_kunkka/kunkka_spell_torrent_splash.vpcf"
+          "EffectAttachType"    "start_at_customorigin"
+          "EffectRadius"      "%radius"
+          "ControlPoints"
+          {
+            "00"        "POINT"
+          }
+        }
+      
+        "ActOnTargets"
+        {
+          "Target"
+          {
+            "Center"      "POINT"
+            "Radius"      "%radius"
+            "Teams"       "DOTA_UNIT_TARGET_TEAM_ENEMY"
+            "Types"       "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+          }
+          
+          "Action"
+          {           
+            "RemoveModifier"
+            {
+              "Target"      "TARGET"
+              "ModifierName"    "modifier_knockback"
+            }
+            
+            "Knockback"
+            {
+              "Target"      "TARGET"
+              "Center"      "CASTER"
+              "Duration"      "%stun_duration"
+              "Distance"      "0"
+              "Height"      "%torrent_height"
+              "IsFixedDistance" "1"
+              "ShouldStun"    "1"
+            }
+            
+            "ApplyModifier"
+            {
+              "Target"      "TARGET"
+              "ModifierName"    "modifier_torrent_damage_thinker_datadriven"
+            }
+           
+            "RunScript"
+            {
+              "ScriptFile"      "torrent.lua"
+              "Function"        "torrent_teleport"
+            }
+
+            "Damage"
+            {
+              "Target"      "TARGET"
+              "Damage"      "%AbilityDamage / 2"
+              "Type"        "DAMAGE_TYPE_MAGICAL"
+            }
+            
+            "ApplyModifier"
+            {
+              "Target"      "TARGET"
+              "ModifierName"    "modifier_torrent_slow_debuff_datadriven"
+            }           
+          }
+        }       
+      }
+    }
+  }
+  
+  "Modifiers"
+  {
+    "modifier_torrent_damage_thinker_datadriven"
+    {
+      "IsPurgable"        "0"
+      "IsHidden"          "1"
+      
+      "Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
+      
+      "Duration"          "%stun_duration"
+      "ThinkInterval"       "%stun_duration / %tick_count"
+      "OnIntervalThink"
+      {
+        "Damage"
+        {
+          "Target"      "TARGET"
+          "Damage"      "%AbilityDamage / ( 2 * %tick_count )"
+          "Type"        "DAMAGE_TYPE_MAGICAL"
+        }
+      }
+      
+      "States"
+      {
+        "MODIFIER_STATE_NO_UNIT_COLLISION"    "MODIFIER_STATE_VALUE_ENABLED"
+      }
+    }
+    
+    "modifier_torrent_slow_debuff_datadriven"
+    {
+      "IsDebuff"          "1"
+    
+      "Duration"          "%stun_duration + %slow_duration"
+    
+      "Properties"
+      {
+        "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"    "movespeed_bonus"
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"invoker_sun_strike_datadriven"
+{
+  // General
+  //-------------------------------------------------------------------------------------------------------------
+  "BaseClass"       "ability_datadriven"
+  "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+  "MaxLevel"            "1"
+  "HotKeyOverride"        "T"
+  "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+  "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO"
+  "AbilityUnitTargetFlags"    "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES | DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS | DOTA_UNIT_TARGET_FLAG_NOT_ILLUSION"
+  "AbilityUnitDamageType"     "DAMAGE_TYPE_PURE"
+  "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_YES"
+  "FightRecapLevel"       "1"
+  "AbilityTextureName"      "invoker_sun_strike"
+  "AOERadius"           "%area_of_effect"
+
+  // Precache
+  //-------------------------------------------------------------------------------------------------------------
+  "precache"
+  {
+    "soundfile"   "soundevents/game_sounds_heroes/game_sounds_invoker.vsndevts"
+    "particle"    "particles/units/heroes/hero_invoker/invoker_sun_strike.vpcf"
+    "particle"    "particles/units/heroes/hero_invoker/invoker_sun_strike_team.vpcf"
+  }
+
+  // Stats
+  //-------------------------------------------------------------------------------------------------------------
+  "AbilityCastRange"        "0"
+  "AbilityCastPoint"        "0"
+  "AbilityCooldown"       "30"
+  "AbilityManaCost"       "175"
+    
+  // Special
+  //-------------------------------------------------------------------------------------------------------------
+  "AbilitySpecial"
+  {
+    "01"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "delay"         "1.7"
+    }
+    "02"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "area_of_effect"    "175"
+    }
+    "03"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "damage"        "100 162.5 225 287.5 350 412.5 475"
+      "levelkey"        "exortlevel"
+    }
+    "04"
+    {
+      "var_type"        "FIELD_INTEGER"
+      "vision_distance"   "400"
+    }
+    "05"
+    {
+      "var_type"        "FIELD_FLOAT"
+      "vision_duration"   "4.0"
+    }
+  }
+
+  "OnSpellStart"
+  {
+    "CreateThinker"
+    {
+      "ModifierName"  "modifier_sun_strike_datadriven"
+      "Target"    "POINT"
+    }
+  }
+
+  "Modifiers"
+  {
+    "modifier_sun_strike_datadriven"
+    {
+      "Duration"    "%delay"
+
+      "OnCreated"
+      {
+        "ApplyModifier"
+        {
+          "ModifierName"  "modifier_invisible"
+          "Target"    "TARGET"
+          "Duration"    "%delay - 0.1" // This is so that the charge sound isnt heard
+        }
+
+        "FireSound"
+        {
+          "EffectName"  "Hero_Invoker.SunStrike.Charge"
+          "Target"    "TARGET"
+        }
+
+        "RunScript"
+        {
+          "ScriptFile"  "heroes/hero_invoker/sun_strike.lua"
+          "Function"    "sun_strike_charge"
+          "charge_particle" "particles/units/heroes/hero_invoker/invoker_sun_strike_team.vpcf"
+        }
+
+        "DelayedAction"
+        {
+          "Delay"     "%delay"
+          "Action"    
+          {
+            "FireSound"
+            {
+              "EffectName"  "Hero_Invoker.SunStrike.Ignite"
+              "Target"    "TARGET"
+            }
+
+            "FireEffect"
+            {
+              "EffectName"        "particles/units/heroes/hero_invoker/invoker_sun_strike.vpcf"
+              "EffectAttachType"  "follow_origin"
+              "Target"            "TARGET"
+
+              "ControlPoints"
+              {
+                "01"  "%area_of_effect 0 0"
+              }
+            }
+
+            "RunScript"
+            {
+              "ScriptFile"  "heroes/hero_invoker/sun_strike.lua"
+              "Function"    "sun_strike_damage"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
 
 
 }

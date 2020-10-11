@@ -14,38 +14,30 @@
 
   "item_gloves"
   {
-    "ItemCost"            "235"
+    "ItemCost"            "200"
   }
 
   "item_boots"
   {
-    "ItemCost"            "1100"
+    "ItemCost"            "1500"
   }
 
-"item_refresher"
+"item_recipe_refresher"
 {
   "SecretShop" "1"
+  "ItemCost"  "1600"
 }
+
 
 
 
 "item_dust"
 {
-      "ItemCost"            "50"
+      "ItemCost"            "300"
 }
 
-  
 
-  "item_blink"
-  {
-    "AbilityCastRange"        "700"
-    "AbilityCastPoint"        "0.0"
-    "AbilityCooldown"         "30.0"
-    "ItemCost"                "1600"
-    "ItemShopTags"            "Secret Shop"
-    "ItemQuality"             "Secret Shop"
-    "SecretShop" "1" 
-  }
+
 
   "item_hyperstone"
   {
@@ -173,13 +165,6 @@
     }
   }
 
-  "item_branches"     
-  {
-  "ItemCost"            "10"
-  "AbilityCastRange"        "3000"
-  }
-
-
 
   //"item_staff_of_wizardry"      "REMOVE"
   //"item_ring_of_regen"      "REMOVE"
@@ -204,15 +189,14 @@
   
 "item_recipe_force_staff"  
  {
-  "ItemCost"            "100"
-  "SecretShop" "1" 
+  "ItemCost"            "600"
  }
 
 
 
 "item_shadow_amulet"     
  {
-  "ItemCost"            "800"
+  "ItemCost"            "1500"
   "SecretShop" "1" 
 
  }
@@ -220,19 +204,37 @@
 
 "item_ward_sentry"      
 {
-  "ItemCost"            "5"
-  "ItemStockMax"                    "8"
-  "ItemStockInitial"                "6"
-  "ItemStockTime"                    "30.0"
+  "ItemCost"            "350"
+  "ItemStockMax"                    "2"
+  "ItemStockInitial"                "1"
+  "ItemStockTime"                    "60.0"
 }
 
 "item_ward_observer"      
 {
-  "ItemCost"            "50"
-  "ItemStockMax"                    "2"
+  "ItemCost"            "350"
+  "ItemStockMax"                    "1"
   "ItemStockInitial"                "1"
   "ItemStockTime"                    "100.0"
 }
+
+
+  "item_ring_of_health"    
+  {
+  "ItemCost"            "200"
+  }
+
+  "item_void_stone"    
+  {
+  "ItemCost"            "200"
+  }
+
+   "item_void_stone"    
+  {
+  "ItemCost"            "200"
+  }
+  //"item_void_stone"     "REMOVE"
+
 
 
 
@@ -240,8 +242,6 @@
   //"item_ward_observer"      "REMOVE"
 
   //"item_tango_single"     "REMOVE"
-  //"item_ring_of_health"     "REMOVE"
-  //"item_void_stone"     "REMOVE"
   //"item_recipe_pers"      "REMOVE"
   //"item_pers"     "REMOVE"
 
@@ -288,7 +288,6 @@
   "item_ultimate_orb"     "REMOVE"
   "item_lifesteal"      "REMOVE"
   "item_sobi_mask"      "REMOVE"
-  "item_boots"      "REMOVE"
   "item_gem"      "REMOVE"
   "item_cloak"      "REMOVE"
   "item_talisman_of_evasion"      "REMOVE"

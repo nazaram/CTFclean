@@ -1,6 +1,8 @@
 -- Generated from template
 
 require('status_resistance')
+require('timers')
+
 LinkLuaModifier("modifier_status_resistance", "status_resistance.lua", LUA_MODIFIER_MOTION_NONE)
 
 
@@ -18,9 +20,8 @@ if CONSTANTS == nil then
   CONSTANTS = {}
   CONSTANTS.scoreToWin = 10
   CONSTANTS.goldForPoint = 50
-  CONSTANTS.goldForCatch = 15
-  CONSTANTS.goldForSave = 10
-  CONSTANTS.goldForLineCross = 20 
+  CONSTANTS.goldForCatch = 25
+  CONSTANTS.goldForSave = 25
   CONSTANTS.experience = 1000
   -- using this for scoreboard
   -- deny is point
@@ -29,24 +30,28 @@ if CONSTANTS == nil then
   -- assist is save a friend
 end
 
-_G.GoodHasFlag = 0
-_G.BadHasFlag = 0
 
+
+  _G.GoodHasFlag = 0
+  _G.BadHasFlag = 0
+    
+  _G.Button = 0
 
 _G.GAME_ROUND = 1
+
 _G.GAME_ROUND1experiencelose = 75
-_G.GAME_ROUND1experiencewin = 100
+_G.GAME_ROUND1experiencewin = 150
 
-_G.GAME_ROUND2experiencelose = 100
-_G.GAME_ROUND2experiencewin =  125
+_G.GAME_ROUND2experiencelose = 85
+_G.GAME_ROUND2experiencewin =  175
 
-_G.GAME_ROUND3experiencelose = 125
-_G.GAME_ROUND3experiencewin = 150
+_G.GAME_ROUND3experiencelose = 95
+_G.GAME_ROUND3experiencewin = 185
 
-_G.GAME_ROUND4experiencelose = 150
-_G.GAME_ROUND4experiencewin = 175
+_G.GAME_ROUND4experiencelose = 100
+_G.GAME_ROUND4experiencewin = 200
 
-_G.GAME_ROUND5experiencelose = 175
+_G.GAME_ROUND5experiencelose = 125
 _G.GAME_ROUND5experiencewin = 200
 
 _G.GAME_ROUND6experiencelose = 200
@@ -113,9 +118,9 @@ end
 
 XP_PER_LEVEL_TABLE = {
      0, -- 1
-  75,	-- 2
-  175,	-- 3
-  300,	-- 4
+   100,	-- 2
+   250,	-- 3
+   350,	-- 4
   575,	-- 5
   675,	-- 6
   1050,	-- 7
@@ -168,6 +173,8 @@ function CAddonTemplateGameMode:InitGameMode()
 
   GameMode:SetRecommendedItemsDisabled(true)
 	
+  GameRules:SetStrategyTime(0)
+  GameRules:SetShowcaseTime(0)
   GameRules:SetPreGameTime( 15.0)
   GameRules:SetTreeRegrowTime(100)
   GameRules:SetStartingGold(400)
@@ -181,16 +188,34 @@ function CAddonTemplateGameMode:InitGameMode()
   ListenToGameEvent('npc_spawned', Dynamic_Wrap(CAddonTemplateGameMode, 'OnNPCSpawned'), self)
   ListenToGameEvent('entity_hurt', Dynamic_Wrap(CAddonTemplateGameMode, 'OnEntityHurt'), self)
   ListenToGameEvent("entity_killed", Dynamic_Wrap(CAddonTemplateGameMode, "OnEntityKilled"), self)
+  ListenToGameEvent("PickupRune", Dynamic_Wrap(CAddonTemplateGameMode, "PickupRune"), self)
   ListenToGameEvent("dota_player_pick_hero", OnHeroPicked, nil)
+  ListenToGameEvent( "dota_item_picked_up", Dynamic_Wrap(CAddonTemplateGameMode, "OnItemPickUp"), self )
+	ListenToGameEvent('dota_ability_channel_finished', Dynamic_Wrap(GameMode, 'OnAbilityChannelFinished'), self)
+  --ListenToGameEvent('OnGameInProgress', Dynamic_Wrap(GameMode, 'OnGameInProgress'), self)
 
   --GameRules:GetGameModeEntity():SetItemAddedToInventoryFilter( Dynamic_Wrap(CAddonAdvExGameMode, "ItemAddedFilter"), self )
-
   spawnGoodFlag()
   spawnBadFlag()
-
+  Timers:CreateTimer( 24,   function()
+      print("hi aram")
+      spawnBountyRune()
+        return 60.0
+    end
+  )
   GameRules:GetGameModeEntity():SetThink("OnThink", self, "GlobalThink", 2)
 
 end
+
+
+-- function CAddonTemplateGameMode:OnGameInProgress()
+--   print("[BAREBONES] The game has officially begun")
+--    Timers:CreateTimer( 0,   function()
+--       print("hi aram")
+--         return 60.0
+--     end
+--   )
+
 
 
 
@@ -248,21 +273,53 @@ end
       GameRules:SendCustomMessage("<font color='#e5e5e5'> Welcome to Capture the Flag sponsored by </font>" .. "<font color='#ff3232'>buymyhat.com</font>", DOTA_TEAM_NOTEAM, 0)
     end
 
-
-
-    print("Good Players:")
-    print(_G.GoodPlayers)
-    
-    print("Bad Players:")
-    print(_G.BadPlayers)
-
-
     if hero:HasRoomForItem("item_quelling_blade", true, true) then
        local blade = CreateItem("item_quelling_blade", hero, hero)
        blade:SetPurchaseTime(0)
        hero:AddItem(blade)
     end
+
+ if hero:HasRoomForItem("item_ironwood_tree", true, true) then
+       local tree = CreateItem("item_ironwood_tree", hero, hero)
+       tree:SetPurchaseTime(0)
+       hero:AddItem(tree)
+    end
  end
+
+
+function CAddonTemplateGameMode:OnItemPickUp(keys)
+	local hero = EntIndexToHScript(keys.HeroEntityIndex)
+	local itempicked = EntIndexToHScript(keys.ItemEntityIndex)
+	local itemname = keys.itemname
+	if hero:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
+    for i = 0,5 do
+      local item = hero:GetItemInSlot(i)
+      if item then
+        --print("item:"..item:GetAbilityName())
+        if item:GetAbilityName() == "item_capture_good_flag" then
+          --print("found the item!")
+          hero:RemoveItem(item)
+          spawnGoodFlag()
+          print("good guy drop their own flag")
+        end
+      end
+    end
+    end
+    if hero:GetTeamNumber() == DOTA_TEAM_BADGUYS then
+    for i = 0,5 do
+      local item = hero:GetItemInSlot(i)
+      if item then
+        --print("item:"..item:GetAbilityName())
+        if item:GetAbilityName() == "item_capture_bad_flag" then
+         -- print("found the item!")
+          hero:RemoveItem(item)
+          spawnBadFlag()
+          print("bad guy drop their own flag")
+        end
+      end
+    end
+    end
+end
 
 
 -- Evaluate the state of the game
@@ -280,7 +337,7 @@ function spawnGoodFlag()
 --  local flag = CreateItem("item_capture_good_flag", nil, nil)
 --  CreateItemOnPositionSync(Vector(-1822.81, -636.813, 128), flag)
   local flag = CreateItem("item_capture_good_flag", nil, nil)
-  CreateItemOnPositionSync(Vector(-3303.79, 1382.76, 128), flag)
+  CreateItemOnPositionSync(Vector(-3309.73, 528.231, 142.448), flag)
   _G.BadHasFlag = 0
 
 end
@@ -290,18 +347,86 @@ function spawnBadFlag()
   --local flag = CreateItem("item_capture_bad_flag", nil, nil)
   --CreateItemOnPositionSync(Vector(-153.281, 2337.62, 128), flag)
   local flag = CreateItem("item_capture_bad_flag", nil, nil)
-  CreateItemOnPositionSync(Vector(4091.37, 1269.95, 128), flag)
+  CreateItemOnPositionSync(Vector(4093.02, 384.78, 140.719), flag)
    _G.GoodHasFlag = 0
 end
 
+function spawnBountyRune()
+
+  local items_on_the_ground = Entities:FindAllByClassname("item_bounty_rune")
+    for _,item in pairs(items_on_the_ground) do
+        local containedItem = item:GetContainedItem()
+        if containedItem then
+            UTIL_RemoveImmediate(containedItem)
+        end
+        UTIL_RemoveImmediate(item)
+    end
+
+
+  local i = RandomInt(1,3)
+  local z = RandomInt(4,6)
+  print(i)
+  print(z)
+  local bountyrune= CreateItem("item_bounty_rune", nil, nil)  
+  local bountyrune1 = CreateItem("item_bounty_rune_A", nil, nil)  
+  local bountyrune2 = CreateItem("item_bounty_rune_B", nil, nil)  
+  local bountyrune3 = CreateItem("item_bounty_rune_C", nil, nil)  
+  local bountyrune4 = CreateItem("item_bounty_rune_D", nil, nil)  
+  local bountyrune5 = CreateItem("item_bounty_rune_E", nil, nil)  
+  local bountyrune6 = CreateItem("item_bounty_rune_F", nil, nil)  
+
+  if(i==1) then
+    local point =  Entities:FindByName( nil, "Bounty1" ):GetAbsOrigin()
+   -- local bountyrune = CreateItem("item_bounty_rune", nil, nil)
+    CreateItemOnPositionSync(Vector(-1845.27, 2654.2, 472.1),bountyrune1)
+  end
+  if(i==2) then
+    local point =  Entities:FindByName( nil, "Bounty2" ):GetAbsOrigin()
+   -- local bountyrune = CreateItem("item_bounty_rune", nil, nil)
+    CreateItemOnPositionSync(Vector(-3474.08, 3185.92, 267.534), bountyrune2)
+  end
+  if(i==3) then
+    local point =  Entities:FindByName( nil, "Bounty3" ):GetAbsOrigin()
+    --local bountyrune = CreateItem("item_bounty_rune", nil, nil)
+    CreateItemOnPositionSync(Vector(-1971.92, -415.389, 289.565), bountyrune3)
+  end
+  if(z==4) then
+    print("creating 4")
+    local point =  Entities:FindByName( nil, "Bounty4" ):GetAbsOrigin()
+    --local bountyrune = CreateItem("item_bounty_rune", nil, nil)
+    CreateItemOnPositionSync(Vector(2504.43, 2674.78, 407.365), bountyrune4)
+  end
+    if(z==5) then
+    print("creating 5")
+    local point =  Entities:FindByName( nil, "Bounty5" ):GetAbsOrigin()
+   -- local bountyrune = CreateItem("item_bounty_rune", nil, nil)
+    CreateItemOnPositionSync(Vector(4120.02, 3192.45, 314.266), bountyrune5)
+  end
+    if(z==6) then
+    print("creating 6")
+    local point =  Entities:FindByName( nil, "Bounty6" ):GetAbsOrigin()
+   -- local bountyrune = CreateItem("item_bounty_rune", nil, nil)
+    CreateItemOnPositionSync(Vector(2629.35, -437.726, 301.87), bountyrune6)
+  end
+end
+
+
+function CAddonTemplateGameMode:OnItemEquipped(rune_name, unit)
+if rune_name == "item_bounty_rune" then 
+  print("HOLA SENOR")
+  unit:AddExperience(9999 + _G.GAME_ROUND * 3 , DOTA_ModifyXP_Unspecified, false, false)
+end
+end
+
+
 
 function reset()
-  
-
   print("reset")
   EmitGlobalSound("get_ready")
+
 _G.GoodinPrison = 0
 _G.BadinPrison = 0
+
 
   _G.GAME_ROUND = _G.GAME_ROUND + 1
   GameRules:SendCustomMessage("<font color='#a000a0'> Get Ready for Round ".. _G.GAME_ROUND .. "!</font>", DOTA_TEAM_NOTEAM, 0)
@@ -324,6 +449,7 @@ _G.BadinPrison = 0
             hero:Stop()
             SendToConsole("dota_camera_center")
             hero:AddNewModifier(hero, nil, "modifier_stun", nil)
+            print("goodreset")
             --Timers:CreateTimer(3)
             --hero:RemoveModifierByName("modifier_stun")
             --print("LAL")
@@ -334,6 +460,7 @@ _G.BadinPrison = 0
             hero:Stop()
             SendToConsole("dota_camera_center")
             hero:AddNewModifier(hero, nil, "modifier_stun", nil)
+            print("badreset")
             --Timers:CreateTimer(3)
             --hero:RemoveModifierByName("modifier_stun")
             --print("LAL")
@@ -342,12 +469,12 @@ _G.BadinPrison = 0
             local item = hero:GetItemInSlot(i)
             if item then
               if item:GetAbilityName() == "item_capture_good_flag" then
-                print("force drop")
+                print("good flag forcibly dropped")
                 hero:RemoveItem(item)
                 spawnGoodFlag()
               end
               if item:GetAbilityName() == "item_capture_bad_flag" then
-                print("force drop")
+                print("bad flag forcibly dropped")
                 hero:RemoveItem(item)
                 spawnBadFlag()
               end
@@ -356,14 +483,31 @@ _G.BadinPrison = 0
         end
       end
     end
+
+
+
+ local WhoHasFlag = 
+    {
+    GoodHasFlag = _G.GoodHasFlag, 
+    BadHasFlag = _G.BadHasFlag 
+    } 
+
+    
+    CustomGameEventManager:Send_ServerToAllClients("has_flag", WhoHasFlag )
 end
 
 
 function CAddonTemplateGameMode:OnNPCSpawned(keys)
   local hero = EntIndexToHScript(keys.entindex)
+  hero:SetBaseAttackTime(1)
+  print(hero)
+  print(hero:GetBaseAttackTime())
   if hero:IsHero() then
     print("OnNPCSpawnedX")
     hero:SetAbilityPoints(1)
+    torrent_jail = hero:FindAbilityByName("torrent_datadriven")
+    torrent_jail:SetLevel(1) 
+    torrent_jail:SetActivated(false)
   end
 end
 
@@ -398,11 +542,12 @@ function CAddonTemplateGameMode:OnEntityHurt(tbl)
   attacker:EmitSound("Hero_Abaddon.AphoticShield.Destroy")
   victim:EmitSound("DOTA_Item.Dagon5.Target")
 
+  victim:AddNewModifier(nil, nil, "modifier_stunned", {duration = 3})
 
   if attacker:IsHero() then
-    attacker:AddExperience(15 + _G.GAME_ROUND * 3, DOTA_ModifyXP_Unspecified, false, false)
+    attacker:AddExperience(15 + _G.GAME_ROUND * 3 , DOTA_ModifyXP_Unspecified, false, false)
     --attacker:AddExperience(hero:GetCurrentXP() + 100, DOTA_ModifyXP_Unspecified, false, false)
-    attacker:SetGold(attacker:GetGold() + 50 + _G.GAME_ROUND * 10, false)
+    attacker:SetGold(attacker:GetGold() + 15 + _G.GAME_ROUND * 7, false)
   end
 
 
@@ -435,12 +580,21 @@ function CAddonTemplateGameMode:OnEntityHurt(tbl)
         end
       end
     end      
+  
   local ent = Entities:FindByName( nil, "point_teleport_jail_radiant" ):GetAbsOrigin()
   FindClearSpaceForUnit(victim, ent, false)
   victim:Stop()
   --victim:AddNewModifier(victim, nil, "modifier_invulnerable", nil)
   print("inv")
   end
+
+
+ local WhoHasFlag = 
+    {
+    GoodHasFlag = _G.GoodHasFlag, 
+    BadHasFlag = _G.BadHasFlag 
+    } 
+    CustomGameEventManager:Send_ServerToAllClients("has_flag", WhoHasFlag )
 
 end
 
@@ -490,7 +644,6 @@ end
 
 
 
- 
 
 
 --[[
@@ -580,8 +733,6 @@ function pointGood()
     updateScore(score.Good, score.Bad)
     EmitGlobalSound("Tutorial.Quest.complete_01")
 end
-
-
 
 
 
